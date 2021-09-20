@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -28,9 +29,15 @@ const Navbar = ({ totalItems }) => {
             />
             Remy Merch
           </Typography>
+          <div style={{justifyContent: 'space-between'}}>
+            <Link to="/">Home</Link>
+            <Link to="/products">Merch</Link>
+          </div>
+          
+
           <div className={classes.grow} />
           <div className={classes.button}>
-            <IconButton aria-label="Show cart items" color="inherit">
+            <IconButton component={Link} to="/cart" aria-label="Show cart items" color="inherit">
               <Badge badgeContent={totalItems} color="secondary">
                 <ShoppingCart />
               </Badge>

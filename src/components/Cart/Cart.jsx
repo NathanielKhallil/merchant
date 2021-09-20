@@ -61,6 +61,7 @@ function Cart({ cart }) {
         className={classes.title}
         variant="h3"
         style={{ color: "white" }}
+        gutterBottom
       >
         Your Shopping Cart
       </Typography>
