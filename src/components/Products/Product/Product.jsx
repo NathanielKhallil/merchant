@@ -8,6 +8,7 @@ import {
   IconButton,
 } from "@material-ui/core";
 import { AddShoppingCart } from "@material-ui/icons";
+import { Link } from 'react-router-dom';
 
 import useStyles from "./styles";
 
@@ -16,10 +17,12 @@ const Product = ({ product, onAddToCart }) => {
 
   return (
     <Card className={classes.root}>
+      <Link to={`/merchitem/${product.id}`}>
       <CardMedia
         className={classes.media}
         image={product.media.source}
         title={product.name}
+        
       />
       <CardContent style={{ paddingBottom: "0%" }}>
         <div className={classes.cardContent}>
@@ -47,6 +50,7 @@ const Product = ({ product, onAddToCart }) => {
           <AddShoppingCart />
         </IconButton>
       </CardActions>
+      </Link>
     </Card>
   );
 };

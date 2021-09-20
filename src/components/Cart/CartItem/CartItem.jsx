@@ -15,8 +15,8 @@ function CartItem({ item }) {
     <Card
       style={{
         minWidth: "10.8rem",
-        maxWidth: "15rem",
-        maxHeight: "18rem",
+        maxWidth: "21rem",
+        maxHeight: "22rem",
         margin: "0 auto",
       }}
     >
@@ -37,6 +37,12 @@ function CartItem({ item }) {
         </Typography>
       </CardContent>
       <CardActions className={classes.CardActions} />
+        <div className={classes.buttons}>
+          <Button type='button' size='small'>-</Button>
+          <Typography>{item.quantity}</Typography>
+          <Button type='button' size='small'>+</Button>
+        </div>
+        <Button variant='contained' type='button' color='secondary'>Remove</Button>
     </Card>
   );
 }
