@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, Button, Typography, Container } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import { commerce } from "../../../lib/commerce";
+
 import { useState, useEffect } from "react";
 
 const createMarkup = (text) => {
@@ -11,6 +12,7 @@ const createMarkup = (text) => {
 const MerchItem = ({ handleAddToCart }) => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
+  
 
   const fetchProduct = async (id) => {
     const response = await commerce.products.retrieve(id);
@@ -50,6 +52,30 @@ const MerchItem = ({ handleAddToCart }) => {
     fetchProduct(id[2]);
   }, []);
 
+   
+//     const getVariant = async (id) => {
+//     const variant= await commerce.variant.list();
+//     const {name, media, quantity, description, price } = variant
+    
+//     console.log(variant)
+//     setVariant({
+//       id, 
+//       name, 
+//       quantity, 
+//       description, 
+//       src:media.source, 
+//       price: price.formatted_with_symbol  
+//     })
+//     console.log(variant)
+//   }
+
+//   useEffect(() => {
+//     const id = window.location.pathname.split("/");
+//     getVariant(id[2]);
+//   }, []);
+
+
+
   const handleQuantity = (param) => {
     if (param === "decrease" && quantity > 1) {
       setQuantity(quantity - 1);
@@ -75,42 +101,42 @@ const MerchItem = ({ handleAddToCart }) => {
         <Grid item xs={12} md={4}>
           <Typography variant="h2">{product.name}</Typography>
           <Typography
-            variant="p"
+            variant="h7"
             dangerouslySetInnerHTML={createMarkup(product.description)}
           />
           <Typography variant="h6">
-            <Button
-              size="small"
-              variant="contained"
-              style={{ display: "inline" }}
-            >
-              {product.variantS}
-            </Button>
-
-            <Button
-              size="small"
-              variant="contained"
-              style={{ display: "inline" }}
-            >
-              {product.variantM}
-            </Button>
-            <Button
-              size="small"
-              variant="contained"
-              style={{ display: "inline" }}
-            >
-              {product.variantL}
-            </Button>
-            <Button
-              size="small"
-              variant="contained"
-              style={{ display: "inline" }}
-            >
-              {product.variantXL}
-            </Button>
+            <table variant='h7' style={{textAlign: "justify"}}>
+            <caption colspan="5" style={{textAlign: "left"}}>Select your size at checkout!</caption>
+              
+                    <tr style={{textAlign: "center"}}>
+                    <th style={{textAlign: "left", width:'4rem'}}> Size(In):</th>
+                    <th variant='h7' style={{width: "4rem"}}>S</th> 
+                    <th variant='h7' >M</th>
+                    <th variant='h7' >L</th>
+                    <th variant='h7' >XL</th>
+                    </tr>
+                   
+               
+                    <tr style={{textAlign: "center", fontSize:'1rem'}}>
+                        <td style={{textAlign: "left"}}><strong>width:</strong></td>
+                        <td>18</td> 
+                        <td>20</td>
+                        <td>22</td>
+                        <td>24</td>
+                    </tr> 
+                    
+                    <tr style={{textAlign: "center", fontSize:'1rem'}}>
+                        <td style={{textAlign: "left"}}> <strong>height:</strong> </td>
+                        <td> 28 </td>
+                        <td> 29 <sup>1</sup>&frasl;<sub>4</sub> </td>
+                        <td> 30 <sup>1</sup>&frasl;<sub>4</sub> </td>
+                        <td> 31 <sup>1</sup>&frasl;<sub>4</sub> </td>
+                    </tr>
+                                       
+                </table>
           </Typography>
 
-          <Typography variant="h3"> Price: {product.price}</Typography>
+          <Typography variant="h6"> Price: {product.price}</Typography>
           <Grid item xs={12}>
             <Button
               size="small"
@@ -123,7 +149,7 @@ const MerchItem = ({ handleAddToCart }) => {
             </Button>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="h3">Quantity: {quantity}</Typography>
+            <Typography variant="h6">Quantity: {quantity}</Typography>
           </Grid>
           <Grid item xs={12}>
             <Button
@@ -154,3 +180,4 @@ const MerchItem = ({ handleAddToCart }) => {
 };
 
 export default MerchItem;
+
