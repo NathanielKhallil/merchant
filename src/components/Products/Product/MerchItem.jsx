@@ -11,12 +11,17 @@ const createMarkup = (text) => {
 const MerchItem = ({ handleAddToCart }) => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
-  const [products, setProducts] = useState([]);
 
   const fetchProduct = async (id) => {
     const response = await commerce.products.retrieve(id);
-    console.log(response.variant_groups[0].options[0].name);
-    console.log(response.variant_groups[0].options[0].id);
+    const variantS = response.variant_groups[0].options[0].name;
+    const variantM = response.variant_groups[0].options[1].name;
+    const variantL = response.variant_groups[0].options[2].name;
+    const variantXL = response.variant_groups[0].options[3].name;
+    const variantIdS = response.variant_groups[0].options[0].id;
+    const variantIdM = response.variant_groups[0].options[1].id;
+    const variantIdL = response.variant_groups[0].options[2].id;
+    const variantIdXL = response.variant_groups[0].options[3].id;
     const { name, price, media, quantity, description, variant_groups } =
       response;
 
@@ -27,22 +32,22 @@ const MerchItem = ({ handleAddToCart }) => {
       description,
       src: media.source,
       price: price.formatted_with_symbol,
-      variant_groups: variant_groups[0].options[0],
+      variant_groups: [variant_groups],
+      variantS: variantS,
+      variantM: variantM,
+      variantL: variantL,
+      variantXL: variantXL,
+      variantIdS: variantIdS,
+      variantIdM: variantIdM,
+      variantIdL: variantIdL,
+      variantIdXL: variantIdXL,
     });
+    console.log(variant_groups);
   };
 
   useEffect(() => {
     const id = window.location.pathname.split("/");
     fetchProduct(id[2]);
-  }, []);
-
-  const fetchProducts = async () => {
-    const { data } = await commerce.products.list();
-    setProducts(data);
-  };
-
-  useEffect(() => {
-    fetchProducts();
   }, []);
 
   const handleQuantity = (param) => {
@@ -74,7 +79,35 @@ const MerchItem = ({ handleAddToCart }) => {
             dangerouslySetInnerHTML={createMarkup(product.description)}
           />
           <Typography variant="h6">
-            size: {product.variant_groups.name}
+            <Button
+              size="small"
+              variant="contained"
+              style={{ display: "inline" }}
+            >
+              {product.variantS}
+            </Button>
+
+            <Button
+              size="small"
+              variant="contained"
+              style={{ display: "inline" }}
+            >
+              {product.variantM}
+            </Button>
+            <Button
+              size="small"
+              variant="contained"
+              style={{ display: "inline" }}
+            >
+              {product.variantL}
+            </Button>
+            <Button
+              size="small"
+              variant="contained"
+              style={{ display: "inline" }}
+            >
+              {product.variantXL}
+            </Button>
           </Typography>
 
           <Typography variant="h3"> Price: {product.price}</Typography>
