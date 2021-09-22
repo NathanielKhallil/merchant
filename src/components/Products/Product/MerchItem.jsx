@@ -16,14 +16,6 @@ const MerchItem = ({ handleAddToCart }) => {
 
   const fetchProduct = async (id) => {
     const response = await commerce.products.retrieve(id);
-    const variantS = response.variant_groups[0].options[0].name;
-    const variantM = response.variant_groups[0].options[1].name;
-    const variantL = response.variant_groups[0].options[2].name;
-    const variantXL = response.variant_groups[0].options[3].name;
-    const variantIdS = response.variant_groups[0].options[0].id;
-    const variantIdM = response.variant_groups[0].options[1].id;
-    const variantIdL = response.variant_groups[0].options[2].id;
-    const variantIdXL = response.variant_groups[0].options[3].id;
     const { name, price, media, quantity, description, variant_groups } =
       response;
 
@@ -35,14 +27,6 @@ const MerchItem = ({ handleAddToCart }) => {
       src: media.source,
       price: price.formatted_with_symbol,
       variant_groups: [variant_groups],
-      variantS: variantS,
-      variantM: variantM,
-      variantL: variantL,
-      variantXL: variantXL,
-      variantIdS: variantIdS,
-      variantIdM: variantIdM,
-      variantIdL: variantIdL,
-      variantIdXL: variantIdXL,
     });
     console.log(variant_groups);
   };
@@ -53,29 +37,6 @@ const MerchItem = ({ handleAddToCart }) => {
   }, []);
 
    
-//     const getVariant = async (id) => {
-//     const variant= await commerce.variant.list();
-//     const {name, media, quantity, description, price } = variant
-    
-//     console.log(variant)
-//     setVariant({
-//       id, 
-//       name, 
-//       quantity, 
-//       description, 
-//       src:media.source, 
-//       price: price.formatted_with_symbol  
-//     })
-//     console.log(variant)
-//   }
-
-//   useEffect(() => {
-//     const id = window.location.pathname.split("/");
-//     getVariant(id[2]);
-//   }, []);
-
-
-
   const handleQuantity = (param) => {
     if (param === "decrease" && quantity > 1) {
       setQuantity(quantity - 1);
@@ -99,15 +60,15 @@ const MerchItem = ({ handleAddToCart }) => {
         </Grid>
 
         <Grid item xs={12} md={4}>
-          <Typography variant="h2">{product.name}</Typography>
+          <Typography variant="h4">{product.name}</Typography>
           <Typography
-            variant="h7"
+            variant="body2"
             dangerouslySetInnerHTML={createMarkup(product.description)}
           />
           <Typography variant="h6">
-            <table variant='h7' style={{textAlign: "justify"}}>
-            <caption colspan="5" style={{textAlign: "left"}}>Select your size at checkout!</caption>
-              
+            <table variant='h6' style={{textAlign: "justify"}}>
+            <caption colSpan="5" style={{textAlign: "left"}}>Select your size at checkout!</caption>
+                <thead variant="caption">
                     <tr style={{textAlign: "center"}}>
                     <th style={{textAlign: "left", width:'4rem'}}> Size(In):</th>
                     <th variant='h7' style={{width: "4rem"}}>S</th> 
@@ -115,8 +76,9 @@ const MerchItem = ({ handleAddToCart }) => {
                     <th variant='h7' >L</th>
                     <th variant='h7' >XL</th>
                     </tr>
+                </thead>
                    
-               
+                <tbody>
                     <tr style={{textAlign: "center", fontSize:'1rem'}}>
                         <td style={{textAlign: "left"}}><strong>width:</strong></td>
                         <td>18</td> 
@@ -132,7 +94,7 @@ const MerchItem = ({ handleAddToCart }) => {
                         <td> 30 <sup>1</sup>&frasl;<sub>4</sub> </td>
                         <td> 31 <sup>1</sup>&frasl;<sub>4</sub> </td>
                     </tr>
-                                       
+                  </tbody>                     
                 </table>
           </Typography>
 
