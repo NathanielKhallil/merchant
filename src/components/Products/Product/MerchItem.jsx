@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, Button, Typography, Container } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import { commerce } from "../../../lib/commerce";
+import Dropdown from "./Dropdown";
 
 import { useState, useEffect } from "react";
 
@@ -26,9 +27,9 @@ const MerchItem = ({ handleAddToCart }) => {
       description,
       src: media.source,
       price: price.formatted_with_symbol,
-      variant_groups: [variant_groups],
+      variant_groups,
     });
-    console.log(variant_groups);
+    
   };
 
   useEffect(() => {
@@ -71,10 +72,10 @@ const MerchItem = ({ handleAddToCart }) => {
                 <thead variant="caption">
                     <tr style={{textAlign: "center"}}>
                     <th style={{textAlign: "left", width:'4rem'}}> Size(In):</th>
-                    <th variant='h7' style={{width: "4rem"}}>S</th> 
-                    <th variant='h7' >M</th>
-                    <th variant='h7' >L</th>
-                    <th variant='h7' >XL</th>
+                    <th variant='h6' style={{width: "4rem"}}>S</th> 
+                    <th variant='h6' >M</th>
+                    <th variant='h6' >L</th>
+                    <th variant='h6' >XL</th>
                     </tr>
                 </thead>
                    
@@ -96,6 +97,7 @@ const MerchItem = ({ handleAddToCart }) => {
                     </tr>
                   </tbody>                     
                 </table>
+                <Dropdown />
           </Typography>
 
           <Typography variant="h6"> Price: {product.price}</Typography>
@@ -129,7 +131,7 @@ const MerchItem = ({ handleAddToCart }) => {
             <Button
               size="large"
               onClick={() => {
-                handleAddToCart(product.id, quantity);
+                handleAddToCart(product.id, quantity, product.variant_groups);
               }}
             >
               <ShoppingCart /> Add to Cart
