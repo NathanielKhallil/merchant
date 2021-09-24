@@ -25,8 +25,8 @@ const App = () => {
     setCart(await commerce.cart.retrieve());
   };
 
-  const handleAddToCart = async (productId, quantity) => {
-    const { cart } = await commerce.cart.add(productId, quantity);
+  const handleAddToCart = async (productId, quantity, variantData) => {
+    const { cart } = await commerce.cart.add(productId, quantity, variantData);
     setCart(cart);
   };
 
@@ -78,7 +78,7 @@ const App = () => {
           </Route>
 
           <Route exact path="/checkout">
-            <Checkout cart={cart/>
+            <Checkout cart={cart} />
           </Route>
         </Switch>
       </div>
