@@ -5,4 +5,3 @@ export { default as Banner } from "./Banner/Banner";
 export { default as Landing } from "./Landing/Landing";
 export { default as MerchItem } from "./Products/Product/MerchItem";
 export { default as Checkout } from "./CheckoutForm/Checkout/Checkout";
-export { default as Dropdown } from "./Products/Product/Dropdown";
