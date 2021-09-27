@@ -29,12 +29,12 @@ function CartItem({ item, onUpdateCartQty, onRemoveFromCart }) {
         className={classes.CardContent}
         style={{ minWidth: "9.9rem" }}
       >
-        <Typography variant="h7">{item.name}</Typography>
-        <Typography variant="h7">
-          {item.selected_options[0].option_name}
+        <Typography variant="h6">{item.name}</Typography>
+        <Typography variant="h6">
+          {item.variant.description}
         </Typography>
 
-        <Typography variant="h7">
+        <Typography variant="h6">
           <br></br>
           {item.line_total.formatted_with_symbol}
         </Typography>
