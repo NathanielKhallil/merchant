@@ -6,7 +6,7 @@ import { commerce } from '../../lib/commerce'
 
 import FormInput from './FormInput';
 
-function AddressForm( {checkoutToken }) {
+function AddressForm( {checkoutToken, next }) {
     const [shippingCountries, setShippingCountries] = useState([]);
     const [shippingCountry, setShippingCountry] = useState('');
     const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
@@ -61,7 +61,7 @@ function AddressForm( {checkoutToken }) {
         <div>
             <Typography variant='h6' gutterBottom>Shipping Address</Typography>
             <FormProvider {...methods}>
-            <form onSubmit=''>
+            <form onSubmit={methods.handleSubmit((data) => next({...data, shippingCountry, shippingSubdivision, shippingOption}))}>
                 <Grid container spacing={3}>
                  <FormInput required name='firstName' label='First name'/>
                  <FormInput required name='lastName' label='Last name'/>
