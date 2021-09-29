@@ -19,8 +19,7 @@ function Cart({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
       <Grid container spacing={3}>
         {cart.line_items.map((item) => (
           <Grid item xs={12} sm={4} key={item.id}>
-            <div>
-              {" "}
+            <div>    
               <CartItem item={item} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} />
             </div>
           </Grid>
