@@ -8,13 +8,15 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import Review from "./Review";
 
+
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-const PaymentForm = ({ checkoutToken, shippingData, backStep, onCaptureCheckout, nextStep }) => {
+const PaymentForm = ({ checkoutToken, shippingData, backStep, handleCaptureCheckout, nextStep, timeout }) => {
     const handleSubmit = async (event, elements, stripe) => {
         event.preventDefault();
 
         if (!stripe || !elements) return;
+
 
         const cardElement = elements.getElement(CardElement);
 
@@ -34,16 +36,29 @@ const PaymentForm = ({ checkoutToken, shippingData, backStep, onCaptureCheckout,
                     postal_zip_code: shippingData.zip,
                     country: shippingData.shippingCountry,
                 },
-                fulfillment: {shipping_method: shippingData.shippingOption},
+                fulfillment: {
+                  shipping_method: shippingData.shippingOption
+                },
+                billing: {
+                  name: 'Primary', 
+                  street: shippingData.address1, 
+                  town_city: shippingData.city,
+                  county_state: shippingData.shippingSubdivision,
+                  postal_zip_code: shippingData.zip,
+                  country: shippingData.shippingCountry,
+                },
                 payment: {
                     gateway: 'stripe',
                     stripe: {
                     payment_method_id: paymentMethod.id
-                    }
+                    },
+
                 }
             }
-            
-            onCaptureCheckout(checkoutToken.id, orderData);
+            console.log(orderData);
+            handleCaptureCheckout(checkoutToken.id, orderData);
+
+            timeout()
 
             nextStep()
         

@@ -16,12 +16,12 @@ function CartItem({ item, onUpdateCartQty, onRemoveFromCart }) {
       style={{
         minWidth: "10.8rem",
         maxWidth: "21rem",
-        maxHeight: "22rem",
+        maxHeight: "29rem",
         margin: "0 auto",
       }}
     >
       <CardMedia
-        image={item.media.source}
+        image={item.image.url}
         alt={item.name}
         className={classes.media}
       />
@@ -39,22 +39,15 @@ function CartItem({ item, onUpdateCartQty, onRemoveFromCart }) {
           {item.line_total.formatted_with_symbol}
         </Typography>
       </CardContent>
-      <CardActions className={classes.CardActions} />
+      <CardActions className={classes.CartActions}/>
       <div className={classes.buttons}>
-        <Button
-          type="button"
-          size="small"
-          onClick={() => onUpdateCartQty(item.id, item.quantity - 1)}
+        <Button type="button" size="small" onClick={() => onUpdateCartQty(item.id, item.quantity - 1)}
         >
           -
         </Button>
         <Typography>{item.quantity}</Typography>
-        <Button
-          type="button"
-          size="small"
-          onClick={() => onUpdateCartQty(item.id, item.quantity + 1)}
-        >
-          +
+        <Button type="button" size="small" onClick={() => onUpdateCartQty(item.id, item.quantity + 1)}
+        >          +
         </Button>
       </div>
       <Button
