@@ -32,7 +32,7 @@ const MerchItem = ({ handleAddToCart }) => {
       variant_groups: variant_groups,
     });
   };
-
+  console.log(product)
   const getVariants = async (id) => {
     const data = await commerce.products.retrieve(id);
 
