@@ -2,6 +2,7 @@ import React from "react";
 import { Typography, List, ListItem, ListItemText } from "@material-ui/core";
 
 const Review = ({ checkoutToken }) => {
+
   return (
     <div>
       <Typography variant="h6" gutterBottom>
@@ -9,7 +10,7 @@ const Review = ({ checkoutToken }) => {
       </Typography>
       <List disablePadding>
         {checkoutToken.live.line_items.map((product) => (
-          <ListItem style={{ padding: "10px 0" }} key={product.variant.id}>
+          <ListItem style={{ padding: "10px 0" }} key={product.name}>
             <ListItemText
               primary={product.name}
               secondary={`Quantity: ${product.quantity}`}
@@ -17,13 +18,23 @@ const Review = ({ checkoutToken }) => {
             <Typography variant="body2">
               {product.line_total.formatted_with_symbol}
             </Typography>
+
+
           </ListItem>
         ))}
+        <ListItem style={{ padding: "10px 0" }}>
+        <ListItemText primary="Tax" />
+        <Typography variant="body2">
+        {checkoutToken.live.tax.amount.formatted_with_symbol}
+      </Typography>
+      </ListItem>
+        
+        
 
         <ListItem style={{ padding: "10px 0" }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" style={{ fontWeight: 700 }}>
-            {checkoutToken.live.subtotal.formatted_with_symbol}
+            {checkoutToken.live.total_with_tax.formatted_with_symbol}
           </Typography>
         </ListItem>
       </List>
