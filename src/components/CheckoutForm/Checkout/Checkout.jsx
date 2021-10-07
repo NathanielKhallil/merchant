@@ -23,6 +23,7 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [shippingData, setShippingData] = useState({});
   const [isFinished, setIsFinished] = useState(false);
+  const [tokenUpdate, setTokenUpdate] = useState(null)
   const history = useHistory();
 
   useEffect(() => {
@@ -30,17 +31,35 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
       try {
         const token = await commerce.checkout.generateToken(cart.id, {
           type: "cart",
-        });
-
+        })    
         setCheckoutToken(token);
+
       } catch (error) {
           history.push('/');
       }
     };
 
+  
     generateToken();
   }, [cart, history]);
 
+  useEffect(() => {
+    const setTax = async () => {
+      if (checkoutToken) {
+        const token2 = await commerce.checkout.getLocationFromIP(checkoutToken).then((result) => commerce.checkout.setTaxZone(checkoutToken.id, {
+          country: result.country_code,
+          region: result.region_code,
+          postal_zip_code: result.postal_zip_code,
+          }).then(commerce.checkout.getLive(checkoutToken.id)));
+      if (token2) setTokenUpdate(token2.live);
+  
+      }
+     };
+
+     setTax();
+    }, [checkoutToken]);
+  
+  
   const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
   const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
@@ -48,7 +67,6 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
     setShippingData(data);
     nextStep();
   };
-
 
   const timeout = () => {
     setTimeout(() => {
@@ -95,6 +113,7 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
       <PaymentForm
         shippingData={shippingData}
         checkoutToken={checkoutToken}
+        tokenUpdate={tokenUpdate}
         nextStep={nextStep}
         backStep={backStep}
         handleCaptureCheckout={handleCaptureCheckout}
