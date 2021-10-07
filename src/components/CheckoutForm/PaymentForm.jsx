@@ -11,7 +11,7 @@ import Review from "./Review";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-const PaymentForm = ({ checkoutToken, shippingData, backStep, handleCaptureCheckout, nextStep, timeout }) => {
+const PaymentForm = ({ checkoutToken, shippingData, backStep, handleCaptureCheckout, nextStep, timeout, tokenUpdate }) => {
     const handleSubmit = async (event, elements, stripe) => {
         event.preventDefault();
 
@@ -67,7 +67,7 @@ const PaymentForm = ({ checkoutToken, shippingData, backStep, handleCaptureCheck
 
     return (
     <>
-      <Review checkoutToken={checkoutToken} />
+      <Review checkoutToken={checkoutToken} tokenUpdate={tokenUpdate} />
       <Divider />
       <Typography variant="h6" gutterBottom style={{ margin: "20px 0" }}>
         Payment Methods

@@ -4,24 +4,8 @@ import {commerce} from "../../lib/commerce";
 
 
 
-const Review = ({ checkoutToken }) => {
-  const [tokenUpdate, setTokenUpdate] = useState([])
-  
-  const updateToken = () => {
-    commerce.checkout.getLocationFromIP(checkoutToken).then((result) => commerce.checkout.setTaxZone(checkoutToken.id, {
-    country: result.country_code,
-    region: result.region_code,
-    postal_zip_code: result.postal_zip_code,
-    }).then(commerce.checkout.getLive(checkoutToken.id).then((response) => setTokenUpdate(response))))
-  }
-  useEffect(() => {
-    let mounted = true;
-    if (mounted) 
-      updateToken()
-      mounted = false;
-  }, [setTokenUpdate]);
-  console.log(tokenUpdate.line_items)
-
+const Review = ({ checkoutToken }, {tokenUpdate}) => {
+  console.log(tokenUpdate);
   return (
     <div>
       <Typography variant="h6" gutterBottom>
@@ -63,7 +47,9 @@ const Review = ({ checkoutToken }) => {
         </ListItem>
       </List>
     </div>
-  );
+  )
+  
+
 };
 
 export default Review;
