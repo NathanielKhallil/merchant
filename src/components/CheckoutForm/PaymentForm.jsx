@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Typography, Button, Divider } from "@material-ui/core";
 import {
   Elements,
@@ -8,64 +8,76 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import Review from "./Review";
 
+const PaymentForm = ({
+  checkoutToken,
+  shippingData,
+  backStep,
+  handleCaptureCheckout,
+  nextStep,
+  timeout,
+  tokenUpdate,
+}) => {
+  const [stripePromise, setStripePromise] = useState(() =>
+    loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
+  );
+  const handleSubmit = async (event, elements, stripe) => {
+    event.preventDefault();
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+    if (!stripe || !elements) return;
 
-const PaymentForm = ({ checkoutToken, shippingData, backStep, handleCaptureCheckout, nextStep, timeout, tokenUpdate }) => {
-    const handleSubmit = async (event, elements, stripe) => {
-        event.preventDefault();
+    const cardElement = elements.getElement(CardElement);
 
-        if (!stripe || !elements) return;
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card: cardElement,
+    });
 
+    if (error) {
+      console.log(error);
+    } else {
+      const orderData = {
+        line_items: checkoutToken.live.line_items,
+        customer: {
+          firstname: shippingData.firstName,
+          lastname: shippingData.lastName,
+          email: shippingData.email,
+        },
+        shipping: {
+          name: "Primary",
+          street: shippingData.address1,
+          town_city: shippingData.city,
+          county_state: shippingData.shippingSubdivision,
+          postal_zip_code: shippingData.zip,
+          country: shippingData.shippingCountry,
+        },
+        fulfillment: {
+          shipping_method: shippingData.shippingOption,
+        },
+        billing: {
+          name: "Primary",
+          street: shippingData.address1,
+          town_city: shippingData.city,
+          county_state: shippingData.shippingSubdivision,
+          postal_zip_code: shippingData.zip,
+          country: shippingData.shippingCountry,
+        },
+        payment: {
+          gateway: "stripe",
+          stripe: {
+            payment_method_id: paymentMethod.id,
+          },
+        },
+      };
 
-        const cardElement = elements.getElement(CardElement);
+      handleCaptureCheckout(checkoutToken.id, orderData);
 
-        const { error, paymentMethod } = await stripe.createPaymentMethod({type: 'card', card: cardElement});
+      timeout();
 
-        if(error) {
-            console.log(error);
-        } else {
-            const orderData = {
-                line_items: checkoutToken.live.line_items,
-                customer: { firstname: shippingData.firstName, lastname: shippingData.lastName, email: shippingData.email},
-                shipping: {
-                    name: 'Primary', 
-                    street: shippingData.address1, 
-                    town_city: shippingData.city,
-                    county_state: shippingData.shippingSubdivision,
-                    postal_zip_code: shippingData.zip,
-                    country: shippingData.shippingCountry,
-                },
-                fulfillment: {
-                  shipping_method: shippingData.shippingOption
-                },
-                billing: {
-                  name: 'Primary', 
-                  street: shippingData.address1, 
-                  town_city: shippingData.city,
-                  county_state: shippingData.shippingSubdivision,
-                  postal_zip_code: shippingData.zip,
-                  country: shippingData.shippingCountry,
-                },
-                payment: {
-                    gateway: 'stripe',
-                    stripe: {
-                    payment_method_id: paymentMethod.id
-                    },
-
-                }
-            }
-            console.log(orderData);
-            handleCaptureCheckout(checkoutToken.id, orderData);
-
-            timeout()
-
-            nextStep()
-        
-        }
+      nextStep();
     }
-
-    return (
+  };
+  console.log(tokenUpdate);
+  return (
     <>
       <Review checkoutToken={checkoutToken} tokenUpdate={tokenUpdate} />
       <Divider />
@@ -89,7 +101,7 @@ const PaymentForm = ({ checkoutToken, shippingData, backStep, handleCaptureCheck
                   disabled={!stripe}
                   color="primary"
                 >
-                  Pay {checkoutToken.live.subtotal.formatted_with_symbol}
+                  Pay {tokenUpdate.total_with_tax.formatted_with_symbol}
                 </Button>
               </div>
             </form>
@@ -98,6 +110,6 @@ const PaymentForm = ({ checkoutToken, shippingData, backStep, handleCaptureCheck
       </Elements>
     </>
   );
-}
+};
 
 export default PaymentForm;
