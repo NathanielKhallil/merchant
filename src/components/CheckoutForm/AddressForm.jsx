@@ -21,10 +21,8 @@ function AddressForm({ checkoutToken, next }) {
   const [shippingSubdivision, setShippingSubdivision] = useState("");
   const [shippingOptions, setShippingOptions] = useState([]);
   const [shippingOption, setShippingOption] = useState("");
+  const [shippingDetails, setShippingDetails] = useState([]);
   const methods = useForm();
-
-
-
 
   const countries = Object.entries(shippingCountries).map(([code, name]) => ({
     id: code,
@@ -87,6 +85,27 @@ function AddressForm({ checkoutToken, next }) {
       );
   }, [shippingSubdivision, checkoutToken.id, shippingCountry]);
 
+  useEffect(() => {
+    const checkShipping = async () => {
+      if (!shippingOption || !shippingCountry || !shippingSubdivision)
+        return console.log("Waiting for shipping fields to be selected");
+
+      if (shippingOption && shippingCountry && shippingSubdivision) {
+        const response = await commerce.checkout.checkShippingOption(
+          checkoutToken.id,
+          {
+            shipping_option_id: shippingOption,
+            country: shippingCountry,
+            region: shippingSubdivision,
+          }
+        );
+        setShippingDetails(response);
+      }
+    };
+
+    checkShipping();
+  }, [shippingCountry, shippingOption, shippingSubdivision, checkoutToken.id]);
+
   return (
     <div>
       <Typography variant="h6" gutterBottom>
@@ -100,6 +119,7 @@ function AddressForm({ checkoutToken, next }) {
               shippingCountry,
               shippingSubdivision,
               shippingOption,
+              shippingDetails,
             })
           )}
         >
