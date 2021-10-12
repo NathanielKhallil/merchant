@@ -20,6 +20,7 @@ const PaymentForm = ({
   const [stripePromise, setStripePromise] = useState(() =>
     loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
   );
+
   const handleSubmit = async (event, elements, stripe) => {
     event.preventDefault();
 
@@ -38,7 +39,7 @@ const PaymentForm = ({
       const orderData = {
         line_items: checkoutToken.live.line_items,
         customer: {
-          firstname: shippingData.firstName,
+          firstname: shippingData.firstname,
           lastname: shippingData.lastName,
           email: shippingData.email,
         },
@@ -76,10 +77,14 @@ const PaymentForm = ({
       nextStep();
     }
   };
-  console.log(tokenUpdate);
+
   return (
     <>
-      <Review checkoutToken={checkoutToken} tokenUpdate={tokenUpdate} />
+      <Review
+        checkoutToken={checkoutToken}
+        tokenUpdate={tokenUpdate}
+        shippingData={shippingData}
+      />
       <Divider />
       <Typography variant="h6" gutterBottom style={{ margin: "20px 0" }}>
         Payment Methods

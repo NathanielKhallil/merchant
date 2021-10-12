@@ -41,9 +41,14 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
     generateToken();
   }, [cart, history]);
 
+  const next = (data) => {
+    setShippingData(data);
+    nextStep();
+  };
+
   useEffect(() => {
-    const setTax = async () => {
-      if (checkoutToken) {
+    const updateToken = async () => {
+      if (checkoutToken && shippingData) {
         const token2 = await commerce.checkout
           .getLocationFromIP(checkoutToken)
           .then((result) =>
@@ -55,21 +60,16 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
               })
               .then(commerce.checkout.getLive(checkoutToken.id))
           );
+
         if (token2) setTokenUpdate(token2.live);
       }
     };
 
-    setTax();
-  }, [checkoutToken]);
-  console.log(tokenUpdate);
+    updateToken(shippingData);
+  }, [checkoutToken, shippingData]);
 
   const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
   const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
-
-  const next = (data) => {
-    setShippingData(data);
-    nextStep();
-  };
 
   const timeout = () => {
     setTimeout(() => {
