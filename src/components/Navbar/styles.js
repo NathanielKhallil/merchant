@@ -12,11 +12,34 @@ export default makeStyles((theme) => ({
     },
   },
   title: {
-    flexGrow: 1,
+    flexGrow: 10,
     alignItems: "center",
     display: "flex",
     textDecoration: "none",
   },
+
+  navBar: {
+    display: "flex",
+    fontFamily: "",
+    flexGrow: 10,
+    flexDirection: "row",
+  },
+
+  listItem: {
+    display: "block",
+    fontWeight: "bold",
+    color: "black",
+    float: "left",
+    padding: "0 10px",
+  },
+
+  link: {
+    textDecoration: "none",
+    "&:hover": {
+      color: "rgb(190, 0, 0, 1)",
+    },
+  },
+
   image: {
     marginRight: "10px",
   },

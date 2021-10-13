@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -16,7 +16,6 @@ const Navbar = ({ totalItems }) => {
   const classes = useStyles();
   const location = useLocation();
 
- 
   return (
     <div>
       <AppBar position="fixed" className={classes.appBar} color="inherit">
@@ -30,26 +29,52 @@ const Navbar = ({ totalItems }) => {
             />
             Remy Merch
           </Typography>
-          <div style={{justifyContent: 'space-between'}}>
-            <Link to="/">Home</Link>
-            <Link to="/products">Merch</Link>
-          </div>
-          
+          <Typography variant="h7" className={classes.navBar}>
+            <nav
+              className={classes.navBar}
+              style={{ justifyContent: "flex-end" }}
+            >
+              <ul
+                style={{
+                  listStyle: "none",
+                  display: "inline",
+                  padding: "0",
+                  width: "8rem",
+                }}
+              >
+                <li className={classes.listItem}>
+                  <Link className={classes.link} to="/">
+                    Home
+                  </Link>
+                </li>
+                <li className={classes.listItem}>
+                  <Link className={classes.link} to="/products">
+                    Merch
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </Typography>
 
           <div className={classes.grow} />
-          {location.pathname !== '/cart' && (
-          <div className={classes.button}>
-              <IconButton component={Link} to="/cart" aria-label="Show cart items" color="inherit">
-              <Badge badgeContent={totalItems} color="secondary">
-                <ShoppingCart />
-              </Badge>
-            </IconButton>
-          </div>)}
+          {location.pathname !== "/cart" && (
+            <div className={classes.button}>
+              <IconButton
+                component={Link}
+                to="/cart"
+                aria-label="Show cart items"
+                color="inherit"
+              >
+                <Badge badgeContent={totalItems} color="secondary">
+                  <ShoppingCart />
+                </Badge>
+              </IconButton>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
     </div>
-           
   );
 };
-           
+
 export default Navbar;
