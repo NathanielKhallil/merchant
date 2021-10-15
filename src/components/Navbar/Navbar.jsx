@@ -27,7 +27,7 @@ const Navbar = ({ totalItems }) => {
               height="25px"
               className={classes.image}
             />
-            Remy Merch
+            Ephemeral Remy 
           </Typography>
           <Typography component={'span'} variant="body1" className={classes.navBar}>
             <Toolbar
