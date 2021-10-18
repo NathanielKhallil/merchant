@@ -17,13 +17,13 @@ const Footer = () => {
         style={{
           position: "fixed",
           background: "#000",
-          marginTop: "95vh",
+          marginTop: "92.5vh",
         }}
       >
         <Container maxWidth="md">
           <Toolbar>
             <Typography variant="body1" color="inherit">
-              Social Media
+              Follow me on my official social media accounts!
             </Typography>
           </Toolbar>
         </Container>
