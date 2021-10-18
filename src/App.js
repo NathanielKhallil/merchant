@@ -8,6 +8,7 @@ import {
   Landing,
   MerchItem,
   Checkout,
+  Footer,
 } from "./components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -107,6 +108,8 @@ const App = () => {
             />
           </Route>
         </Switch>
+
+        <Footer />
       </div>
     </Router>
   );
