@@ -2,15 +2,24 @@ import React from "react";
 import { Container, Typography, Button, Grid } from "@material-ui/core";
 import useStyles from "./styles";
 import CartItem from "./CartItem/CartItem";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
-function Cart({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart }) {
+function Cart({
+  cart,
+  handleUpdateCartQty,
+  handleRemoveFromCart,
+  handleEmptyCart,
+}) {
   const classes = useStyles();
 
   const EmptyCart = () => (
     <Typography varient="subtitle1" style={{ color: "white" }}>
-      You have no items in your cart. 
-      <Link to='/products' className={classes.link}>Add some merch</Link>!
+      You have no items in your cart.
+      <Link to="/products" className={classes.link}>
+        Add some merch
+      </Link>
+      !
     </Typography>
   );
 
@@ -18,9 +27,13 @@ function Cart({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
     <div>
       <Grid container spacing={3}>
         {cart.line_items.map((item) => (
-          <Grid item xs={12} sm={4} key={item.id}>
-            <div>    
-              <CartItem item={item} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} />
+          <Grid item xs={12} sm={4} key={uuidv4()}>
+            <div>
+              <CartItem
+                item={item}
+                onUpdateCartQty={handleUpdateCartQty}
+                onRemoveFromCart={handleRemoveFromCart}
+              />
             </div>
           </Grid>
         ))}
@@ -41,7 +54,8 @@ function Cart({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
             Empty Cart
           </Button>
           <Button
-            component={Link} to='checkout'
+            component={Link}
+            to="checkout"
             className={classes.checkoutButton}
             size="large"
             type="button"

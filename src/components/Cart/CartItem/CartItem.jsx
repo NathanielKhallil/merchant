@@ -30,24 +30,29 @@ function CartItem({ item, onUpdateCartQty, onRemoveFromCart }) {
         style={{ minWidth: "9.9rem" }}
       >
         <Typography variant="h6">{item.name}</Typography>
-        <Typography variant="h6">
-          {item.variant.description}
-        </Typography>
+        <Typography variant="h6">{item.variant.description}</Typography>
 
         <Typography variant="h6">
-          <br></br>
           {item.line_total.formatted_with_symbol}
         </Typography>
       </CardContent>
-      <CardActions className={classes.CartActions}/>
+      <CardActions className={classes.CartActions} />
       <div className={classes.buttons}>
-        <Button type="button" size="small" onClick={() => onUpdateCartQty(item.id, item.quantity - 1)}
+        <Button
+          type="button"
+          size="small"
+          onClick={() => onUpdateCartQty(item.id, item.quantity - 1)}
         >
           -
         </Button>
         <Typography>{item.quantity}</Typography>
-        <Button type="button" size="small" onClick={() => onUpdateCartQty(item.id, item.quantity + 1)}
-        >          +
+        <Button
+          type="button"
+          size="small"
+          onClick={() => onUpdateCartQty(item.id, item.quantity + 1)}
+        >
+          {" "}
+          +
         </Button>
       </div>
       <Button
