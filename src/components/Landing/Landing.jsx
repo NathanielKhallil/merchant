@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
+import useStyles from "./styles";
 
 function Landing() {
-    return (
-        <div>
-            <p> Placeholder content</p>
-        </div>
-    )
+  const classes = useStyles();
+  return (
+    <div className={classes.footerPhantom}>
+      <p> Placeholder content</p>
+    </div>
+  );
 }
 
-export default Landing
+export default Landing;
