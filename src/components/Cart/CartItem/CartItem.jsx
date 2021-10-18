@@ -30,9 +30,11 @@ function CartItem({ item, onUpdateCartQty, onRemoveFromCart }) {
         style={{ minWidth: "9.9rem" }}
       >
         <Typography variant="h6">{item.name}</Typography>
-        <Typography variant="h6">{item.variant.description}</Typography>
-
-        <Typography variant="h6">
+        <Typography variant="body2">
+          Size: {item.variant.description}
+        </Typography>
+        <br /> <br />
+        <Typography variant="body2">
           {item.line_total.formatted_with_symbol}
         </Typography>
       </CardContent>

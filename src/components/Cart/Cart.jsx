@@ -39,7 +39,7 @@ function Cart({
         ))}
       </Grid>
       <div className={classes.cardDetails}>
-        <Typography variant="h4" style={{ color: "white" }}>
+        <Typography variant="h5" style={{ color: "white" }}>
           Subtotal: {cart.subtotal.formatted_with_symbol}
         </Typography>
         <div>
@@ -76,13 +76,14 @@ function Cart({
       <div className={classes.toolbar} />
       <Typography
         className={classes.title}
-        variant="h3"
+        variant="h4"
         style={{ color: "white" }}
         gutterBottom
       >
-        Your Shopping Cart
+        In your cart!
       </Typography>
       {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}
+      <div style={{ marginBottom: "5rem" }} />
     </Container>
   );
 }
