@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import {
   InputLabel,
   Select,
@@ -7,14 +7,15 @@ import {
   Button,
   Grid,
   Typography,
+  CircularProgress,
 } from "@material-ui/core";
 import { useForm, FormProvider } from "react-hook-form";
-
 import { commerce } from "../../lib/commerce";
-
 import FormInput from "./FormInput";
+import useStyles from "./Checkout/styles";
 
 function AddressForm({ checkoutToken, next }) {
+  const classes = useStyles();
   const [shippingCountries, setShippingCountries] = useState([]);
   const [shippingCountry, setShippingCountry] = useState("");
   const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
@@ -23,6 +24,7 @@ function AddressForm({ checkoutToken, next }) {
   const [shippingOption, setShippingOption] = useState("");
   const [shippingDetails, setShippingDetails] = useState([]);
   const methods = useForm();
+  
 
   const countries = Object.entries(shippingCountries).map(([code, name]) => ({
     id: code,
@@ -36,6 +38,7 @@ function AddressForm({ checkoutToken, next }) {
     label: `${s0.description} - (${s0.price.formatted_with_symbol})`,
   }));
 
+  
   const fetchShippingCountries = async (checkoutTokenId) => {
     const { countries } = await commerce.services.localeListShippingCountries(
       checkoutTokenId
@@ -57,61 +60,80 @@ function AddressForm({ checkoutToken, next }) {
     checkoutTokenId,
     country,
     region = null
-  ) => {
+  ) => { 
+    
     const options = await commerce.checkout.getShippingOptions(
       checkoutTokenId,
       { country, region }
-    );
+    ) 
+    
+
     setShippingOptions(options);
     setShippingOption(options[0].id);
   };
 
   useEffect(() => {
-    let mounted = true;
-    if (mounted) fetchShippingCountries(checkoutToken.id);
-    return (mounted = false);
-  }, [checkoutToken.id]);
+   
+    if (checkoutToken) fetchShippingCountries(checkoutToken.id);
+     
+  }, [checkoutToken]);
 
   useEffect(() => {
+    
     if (shippingCountry) fetchSubdivisions(shippingCountry);
+      
   }, [shippingCountry]);
 
   useEffect(() => {
-    if (shippingSubdivision)
+   
+    if (shippingSubdivision && shippingCountry)
       fetchShippingOptions(
         checkoutToken.id,
         shippingCountry,
         shippingSubdivision
       );
-  }, [shippingSubdivision, checkoutToken.id, shippingCountry]);
+      
+  }, [shippingSubdivision]);
 
+  
+  
   useEffect(() => {
     const checkShipping = async () => {
-      if (!shippingOption || !shippingCountry || !shippingSubdivision)
-        return console.log("Waiting for shipping fields to be selected");
-
-      if (shippingOption && shippingCountry && shippingSubdivision) {
-        const response = await commerce.checkout.checkShippingOption(
-          checkoutToken.id,
-          {
-            shipping_option_id: shippingOption,
-            country: shippingCountry,
-            region: shippingSubdivision,
+         
+      if (shippingCountry && shippingOption && shippingSubdivision)
+        try {           
+            const response = await commerce.checkout.checkShippingOption(
+              checkoutToken.id, {
+              shipping_option_id: shippingOption,
+              country: shippingCountry,
+              region: shippingSubdivision,
+              }
+              ); 
+              if (response) setShippingDetails(response); 
+            
+          } catch (error) {
+            return console.log(error)
           }
-        );
-        setShippingDetails(response);
-      }
-    };
-
-    checkShipping();
-  }, [shippingCountry, shippingOption, shippingSubdivision, checkoutToken.id]);
+        };
+    let isFinished = false;
+      if (!isFinished) 
+        checkShipping();
+      return () => {
+      isFinished = true;
+      }; 
+ 
+  }, [shippingCountry, shippingOption, shippingSubdivision,]);
 
   return (
+    
     <div>
       <Typography variant="h6" gutterBottom>
         Shipping Address
       </Typography>
       <FormProvider {...methods}>
+        {!shippingDetails ? (
+          <CircularProgress className={classes.spinner} />
+        ) : (
         <form
           onSubmit={methods.handleSubmit((data) =>
             next({
@@ -185,7 +207,7 @@ function AddressForm({ checkoutToken, next }) {
               Next
             </Button>
           </div>
-        </form>
+        </form>)}
       </FormProvider>
     </div>
   );

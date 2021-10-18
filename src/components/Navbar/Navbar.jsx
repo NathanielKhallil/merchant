@@ -27,10 +27,10 @@ const Navbar = ({ totalItems }) => {
               height="25px"
               className={classes.image}
             />
-            Remy Merch
+            Ephemeral Remy 
           </Typography>
-          <Typography variant="h7" className={classes.navBar}>
-            <nav
+          <Typography component={'span'} variant="body1" className={classes.navBar}>
+            <Toolbar
               className={classes.navBar}
               style={{ justifyContent: "flex-end" }}
             >
@@ -53,7 +53,7 @@ const Navbar = ({ totalItems }) => {
                   </Link>
                 </li>
               </ul>
-            </nav>
+            </Toolbar>
           </Typography>
 
           <div className={classes.grow} />
