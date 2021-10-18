@@ -97,7 +97,13 @@ function AddressForm({ checkoutToken, next }) {
               region: shippingSubdivision,
             }
           );
-          if (response) setShippingDetails(response);
+          response &&
+          shippingCountry &&
+          shippingOption &&
+          shippingSubdivision &&
+          checkoutToken
+            ? setShippingDetails(response)
+            : console.log("Waiting for response..");
         } catch (error) {
           return console.log(error);
         }
