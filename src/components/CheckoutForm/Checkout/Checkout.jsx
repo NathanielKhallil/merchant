@@ -28,16 +28,20 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
 
   useEffect(() => {
     const generateToken = async () => {
+   
+     
       try {
         const token = await commerce.checkout.generateToken(cart.id, {
           type: "cart",
         });
         setCheckoutToken(token);
+       
       } catch (error) {
         history.push("/");
       }
+      
     };
-
+    
     generateToken();
   }, [cart, history]);
 
@@ -48,7 +52,7 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
 
   useEffect(() => {
     const updateToken = async () => {
-      if (checkoutToken && shippingData) {
+      if (shippingData && checkoutToken) {
         const token2 = await commerce.checkout
           .getLocationFromIP(checkoutToken)
           .then((result) =>
@@ -59,8 +63,8 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
                 postal_zip_code: result.postal_zip_code,
               })
               .then(commerce.checkout.getLive(checkoutToken.id))
-          );
-
+              );
+              
         if (token2) setTokenUpdate(token2.live);
       }
     };
@@ -121,7 +125,7 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
       </Button>
     </>;
   }
-
+  
   const Form = () =>
     activeStep === 0 ? (
       <AddressForm checkoutToken={checkoutToken} next={next} />
