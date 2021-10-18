@@ -27,9 +27,13 @@ const Navbar = ({ totalItems }) => {
               height="25px"
               className={classes.image}
             />
-            Ephemeral Remy 
+            Ephemeral Remy
           </Typography>
-          <Typography component={'span'} variant="body1" className={classes.navBar}>
+          <Typography
+            component={"span"}
+            variant="body1"
+            className={classes.navBar}
+          >
             <Toolbar
               className={classes.navBar}
               style={{ justifyContent: "flex-end" }}
