@@ -25,18 +25,35 @@ export default makeStyles((theme) => ({
     flexDirection: "row",
   },
 
+  navUl: {
+    display: "inline",
+    padding: "0",
+    width: "12rem",
+    listStyle: "none",
+  },
+
   listItem: {
-    display: "block",
+    display: "inline-block",
     fontWeight: "bold",
-    color: "black",
-    float: "left",
-    padding: "0 10px",
+    marginLeft: "10px",
+    padding: "0 11px",
+    backgroundColor: "white",
+    "&:active": {
+      transform: "scale(1.1)",
+    },
+    "&:hover": {
+      color: "#e60000",
+      // transform: "scale(1.1)",
+    },
   },
 
   link: {
+    fontSize: "105%",
+    width: "50px",
+    color: "black",
     textDecoration: "none",
     "&:hover": {
-      color: "rgb(190, 0, 0, 1)",
+      color: "#e60000",
     },
   },
 
@@ -86,6 +103,12 @@ export default makeStyles((theme) => ({
     width: "100%",
     [theme.breakpoints.up("md")]: {
       width: "20ch",
+    },
+  },
+  icon: {
+    cursor: "pointer",
+    "&:hover": {
+      transform: "scale(1.2)",
     },
   },
 }));
