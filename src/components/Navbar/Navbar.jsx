@@ -38,14 +38,7 @@ const Navbar = ({ totalItems }) => {
               className={classes.navBar}
               style={{ justifyContent: "flex-end" }}
             >
-              <ul
-                style={{
-                  listStyle: "none",
-                  display: "inline",
-                  padding: "0",
-                  width: "8rem",
-                }}
-              >
+              <ul className={classes.navUl}>
                 <li className={classes.listItem}>
                   <Link className={classes.link} to="/">
                     Home
