@@ -21,7 +21,7 @@ const Footer = () => {
         style={{
           position: "fixed",
           background: "#000",
-          marginTop: "92.5vh",
+          marginTop: "94vh",
           justifyContent: "left",
         }}
       >
