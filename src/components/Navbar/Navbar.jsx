@@ -49,6 +49,13 @@ const Navbar = ({ totalItems }) => {
                     Merch
                   </Link>
                 </li>
+
+                <li className={classes.listItem}>
+                  <Link className={classes.link} to="/contact">
+                    Contact
+                  </Link>
+                </li>
+
               </ul>
             </Toolbar>
           </Typography>
