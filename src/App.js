@@ -9,6 +9,7 @@ import {
   MerchItem,
   Checkout,
   Footer,
+  ContactForm,
 } from "./components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -106,6 +107,10 @@ const App = () => {
               handleCaptureCheckout={handleCaptureCheckout}
               error={errorMessage}
             />
+          </Route>
+
+          <Route exact path="/contact">
+            <ContactForm />
           </Route>
         </Switch>
 

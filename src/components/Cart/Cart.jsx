@@ -4,7 +4,7 @@ import {
   Typography,
   Button,
   Grid,
-  Divider,
+
 } from "@material-ui/core";
 import useStyles from "./styles";
 import CartItem from "./CartItem/CartItem";

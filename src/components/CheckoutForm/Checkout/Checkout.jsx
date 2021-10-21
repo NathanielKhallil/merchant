@@ -28,16 +28,20 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
 
   useEffect(() => {
     const generateToken = async () => {
+   
+     
       try {
         const token = await commerce.checkout.generateToken(cart.id, {
           type: "cart",
         });
         setCheckoutToken(token);
+       
       } catch (error) {
         history.push("/");
       }
+      
     };
-
+    
     generateToken();
   }, [cart, history]);
 
@@ -59,8 +63,8 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
                 postal_zip_code: result.postal_zip_code,
               })
               .then(commerce.checkout.getLive(checkoutToken.id))
-          );
-
+              );
+              
         if (token2) setTokenUpdate(token2.live);
       }
     };
@@ -78,6 +82,15 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
   };
 
   const Confirmation = () =>
+  error ? (
+    <>
+      <Typography variant="h5">Error: {error}</Typography>
+      <br />
+      <Button variant="outline" type="button" component={Link} to="/">
+        Back to Home
+      </Button>
+    </>
+  ) : 
     order.customer ? (
       <>
         <div>
@@ -85,7 +98,7 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
             Thank you for your purchase, {order.customer.firstname}{" "}
             {order.customer.lastname}!
           </Typography>
-          <Divider className={classes.divider} />
+          <Divider className={classes.divder} />
           <Typography variant="subtitle2">
             Order ref: {order.customer_reference} ref
           </Typography>
@@ -110,18 +123,9 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
       <div className={classes.spinner}>
         <CircularProgress />
       </div>
-    );
-
-  if (error) {
-    <>
-      <Typography variant="h5">Error: {error}</Typography>
-      <br />
-      <Button variant="outline" type="button" component={Link} to="/">
-        Back to Home
-      </Button>
-    </>;
-  }
-
+    ) 
+    
+  
   const Form = () =>
     activeStep === 0 ? (
       <AddressForm checkoutToken={checkoutToken} next={next} />
@@ -159,7 +163,6 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
             checkoutToken && <Form />
           )}
         </Paper>
-        <divider />
       </main>
     </>
   );

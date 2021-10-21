@@ -21,14 +21,14 @@ export default makeStyles((theme) => ({
   navBar: {
     display: "flex",
     fontFamily: "",
-    flexGrow: 10,
+    flexGrow: 9,
     flexDirection: "row",
   },
 
   navUl: {
     display: "inline",
     padding: "0",
-    width: "12rem",
+    width: "16rem",
     listStyle: "none",
   },
 

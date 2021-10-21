@@ -2,8 +2,6 @@ import React from "react";
 import {
   AppBar,
   Toolbar,
-  IconButton,
-  Badge,
   Typography,
 } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
