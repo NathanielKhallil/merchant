@@ -12,6 +12,68 @@ import {
   ContactForm,
 } from "./components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@material-ui/core";
+
+const defaultTheme = createTheme();
+
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 430,
+      md: 600,
+      lg: 1000,
+      xl: 1536,
+    },
+  },
+  overrides: {
+    MuiTypography: {
+      h6: {
+        fontSize: 13,
+      },
+    },
+    MuiGrid: {
+      "grid-xs-12": {
+        margin: "1rem 0",
+      },
+    },
+    MuiIconButton: {
+      root: {
+        marginTop: ".5rem",
+      },
+    },
+    MuiToolbar: {
+      root: {
+        display: "flex",
+        position: "relative",
+        alignItems: "center",
+
+        [defaultTheme.breakpoints.up("xs")]: {
+          flexDirection: "column",
+        },
+        [defaultTheme.breakpoints.up("sm")]: {
+          flexDirection: "row",
+          justifyContent: "flex-end",
+        },
+        [defaultTheme.breakpoints.down("sm")]: {
+          minHeight: "24px",
+        },
+      },
+      gutters: {
+        [defaultTheme.breakpoints.up("xs")]: {
+          padding: "0 1rem 0 0",
+        },
+      },
+      MuiIconButton: {
+        root: {
+          marginTop: ".5rem",
+          padding: "12px 12px",
+          marginRight: "10px",
+        },
+      },
+    },
+  },
+});
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -74,49 +136,45 @@ const App = () => {
   }, []);
 
   return (
-    <Router>
-      <div>
-        <Navbar totalItems={cart.total_items} />
-        <Banner />
-        <Switch>
-          <Route exact path="/">
-            <Landing />
-          </Route>
-
-          <Route exact path="/products">
-            <Products products={products} onAddToCart={handleAddToCart} />
-          </Route>
-
-          <Route exact path="/merchitem/:id">
-            <MerchItem handleAddToCart={handleAddToCart} />
-          </Route>
-
-          <Route exact path="/cart">
-            <Cart
-              cart={cart}
-              handleUpdateCartQty={handleUpdateCartQty}
-              handleRemoveFromCart={handleRemoveFromCart}
-              handleEmptyCart={handleEmptyCart}
-            />
-          </Route>
-
-          <Route exact path="/checkout">
-            <Checkout
-              cart={cart}
-              order={order}
-              handleCaptureCheckout={handleCaptureCheckout}
-              error={errorMessage}
-            />
-          </Route>
-
-          <Route exact path="/contact">
-            <ContactForm />
-          </Route>
-        </Switch>
-
-        <Footer />
-      </div>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <div>
+          <Navbar totalItems={cart.total_items} />
+          <Banner />
+          <Switch>
+            <Route exact path="/">
+              <Landing />
+            </Route>
+            <Route exact path="/products">
+              <Products products={products} onAddToCart={handleAddToCart} />
+            </Route>
+            <Route exact path="/merchitem/:id">
+              <MerchItem handleAddToCart={handleAddToCart} />
+            </Route>
+            <Route exact path="/cart">
+              <Cart
+                cart={cart}
+                handleUpdateCartQty={handleUpdateCartQty}
+                handleRemoveFromCart={handleRemoveFromCart}
+                handleEmptyCart={handleEmptyCart}
+              />
+            </Route>
+            <Route exact path="/checkout">
+              <Checkout
+                cart={cart}
+                order={order}
+                handleCaptureCheckout={handleCaptureCheckout}
+                error={errorMessage}
+              />
+            </Route>
+            <Route exact path="/contact">
+              <ContactForm />
+            </Route>
+          </Switch>
+          <Footer />
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 };
 

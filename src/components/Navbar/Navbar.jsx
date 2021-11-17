@@ -29,52 +29,51 @@ const Navbar = ({ totalItems }) => {
             />
             Ephemeral Remy
           </Typography>
-          <Typography
-            component={"span"}
-            variant="body1"
-            className={classes.navBar}
-          >
-            <Toolbar
+      
+            <Typography
+              component={"span"}
+              variant="body1"
               className={classes.navBar}
-              style={{ justifyContent: "flex-end" }}
             >
-              <ul className={classes.navUl}>
-                <li className={classes.listItem}>
-                  <Link className={classes.link} to="/">
-                    Home
-                  </Link>
-                </li>
-                <li className={classes.listItem}>
-                  <Link className={classes.link} to="/products">
-                    Merch
-                  </Link>
-                </li>
-
-                <li className={classes.listItem}>
-                  <Link className={classes.link} to="/contact">
-                    Contact
-                  </Link>
-                </li>
-
-              </ul>
-            </Toolbar>
-          </Typography>
-
-          <div className={classes.grow} />
-          {location.pathname !== "/cart" && (
-            <div className={classes.button}>
-              <IconButton
-                component={Link}
-                to="/cart"
-                aria-label="Show cart items"
-                color="inherit"
+              <Toolbar
+                className={classes.navBar}
               >
-                <Badge badgeContent={totalItems} color="secondary">
-                  <ShoppingCart />
-                </Badge>
-              </IconButton>
-            </div>
-          )}
+                <ul className={classes.navUl}>
+                  <li className={classes.listItem}>
+                    <Link className={classes.link} to="/">
+                      Home
+                    </Link>
+                  </li>
+                  <li className={classes.listItem}>
+                    <Link className={classes.link} to="/products">
+                      Merch
+                    </Link>
+                  </li>
+                  <li className={classes.listItem}>
+                    <Link className={classes.link} to="/contact">
+                      Contact
+                    </Link>
+                  </li>
+                </ul>
+              </Toolbar>
+              <div className={classes.grow} />
+            {location.pathname !== "/cart" && (
+              <div className={classes.button}>
+                <IconButton
+                  component={Link}
+                  to="/cart"
+                  aria-label="Show cart items"
+                  color="inherit"
+                >
+                  <Badge badgeContent={totalItems} color="secondary">
+                    <ShoppingCart />
+                  </Badge>
+                </IconButton>
+              </div>
+            )}
+            </Typography>
+            
+      
         </Toolbar>
       </AppBar>
     </div>

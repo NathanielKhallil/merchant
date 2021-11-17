@@ -1,4 +1,4 @@
-import { makeStyles, alpha } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 const drawerWidth = 0;
 
@@ -10,26 +10,60 @@ export default makeStyles((theme) => ({
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
+    [theme.breakpoints.up("xs")]: {
+      display: "block",
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
   },
+
   title: {
     flexGrow: 10,
+    fontWeight: "bold",
     alignItems: "center",
     display: "flex",
     textDecoration: "none",
+    [theme.breakpoints.up("xs")]: {
+      width: "100%",
+      margin: "1rem 0 0 2.2rem",
+      fontSize: "100%",
+    },
+    [theme.breakpoints.up("sm")]: {
+      margin: "1rem 1rem 0rem 3rem",
+      fontSize: "100%",
+      justifyContent: "flex-start",
+    },
+    [theme.breakpoints.up("md")]: {
+      margin: "0 0 0 1rem",
+      fontSize: "105%",
+      justifyContent: "flex-start",
+    },
   },
 
   navBar: {
+    position: "relative",
     display: "flex",
     fontFamily: "",
     flexGrow: 9,
     flexDirection: "row",
+    [theme.breakpoints.up("xs")]: {
+      width: "100%",
+    },
   },
 
   navUl: {
-    display: "inline",
-    padding: "0",
+    display: "flex",
+    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+    padding: "0 1rem 0 0",
     width: "16rem",
     listStyle: "none",
+    [theme.breakpoints.up("xs")]: {
+      width: "14rem",
+      justifyContent: "flex-start",
+    },
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "100%",
+    },
   },
 
   listItem: {
@@ -43,17 +77,28 @@ export default makeStyles((theme) => ({
     },
     "&:hover": {
       color: "#e60000",
-      // transform: "scale(1.1)",
+    },
+    [theme.breakpoints.up("xs")]: {
+      padding: "0 11px",
+    },
+    [theme.breakpoints.up("sm")]: {
+      padding: "0 11px",
     },
   },
 
   link: {
-    fontSize: "105%",
+    fontSize: "100%",
     width: "50px",
     color: "black",
     textDecoration: "none",
     "&:hover": {
       color: "#e60000",
+    },
+    [theme.breakpoints.up("xs")]: {
+      width: "30px",
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: "30px",
     },
   },
 
@@ -61,54 +106,38 @@ export default makeStyles((theme) => ({
     marginRight: "10px",
   },
   menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up("sm")]: {
+    marginRight: theme.spacing(1),
+    [theme.breakpoints.up("xs")]: {
       display: "none",
     },
   },
   grow: {
     flexGrow: 1,
   },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "auto",
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  inputRoot: {
-    color: "inherit",
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
+
   icon: {
     cursor: "pointer",
     "&:hover": {
       transform: "scale(1.2)",
+    },
+  },
+
+  footerBar: {
+    display: "flex",
+    position: "relative",
+    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+    minHeight: "6vh",
+    width: "100%",
+    alignItems: "center",
+    marginTop: "auto",
+  },
+  footerText: {
+    [theme.breakpoints.up("xs")]: {
+      margin: "0",
+      fontSize: "88%",
+    },
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "100%",
     },
   },
 }));

@@ -7,4 +7,9 @@ export default makeStyles(() => ({
     fontWeight: "bold",
     "&:hover": {},
   },
+  reCaptcha: {
+    display: "inline-block",
+    marginLeft: "1rem",
+    width: "80%",
+  },
 }));

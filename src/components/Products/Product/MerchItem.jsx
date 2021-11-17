@@ -74,7 +74,7 @@ const MerchItem = ({ handleAddToCart }) => {
 
   return (
     <Container>
-      <Grid container spacing={4}>
+      <Grid>
         <Grid item xs={12} md={8}>
           <img
             onLoad={() => {
@@ -94,7 +94,7 @@ const MerchItem = ({ handleAddToCart }) => {
           <Typography variant="h6">
             <table variant="h6" style={{ textAlign: "justify" }}>
               <caption colSpan="5" style={{ textAlign: "left" }}>
-                Select your size at checkout!
+                Select your size!
               </caption>
               <thead variant="caption">
                 <tr style={{ textAlign: "center" }}>

@@ -1,13 +1,12 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export default makeStyles(() => ({
+export default makeStyles((theme) => ({
   media: {
-    height: "13rem",
+    height: "10rem",
+    width: "12rem",
   },
-  cardContent: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "22rem",
+  Typography: {
+    textDecoration: "none",
   },
   cartActions: {
     justifyContent: "space-between",

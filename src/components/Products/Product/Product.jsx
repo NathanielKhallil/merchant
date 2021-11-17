@@ -3,21 +3,19 @@ import {
   Card,
   CardMedia,
   CardContent,
-  CardActions,
   Typography,
-  IconButton,
+
 } from "@material-ui/core";
-import { AddShoppingCart } from "@material-ui/icons";
 import { Link } from 'react-router-dom';
 
 import useStyles from "./styles";
 
-const Product = ({ product, onAddToCart }) => {
+const Product = ({ product }) => {
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
-      <Link to={`/merchitem/${product.id}`}>
+      <Link to={`/merchitem/${product.id}`} className={classes.link}>
       <CardMedia
         className={classes.media}
         image={product.media.source}
@@ -26,7 +24,7 @@ const Product = ({ product, onAddToCart }) => {
       />
       <CardContent style={{ paddingBottom: "0%" }}>
         <div className={classes.cardContent}>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h6" gutterBottom style={{fontWeight: "bold"}}> 
             {product.name}
           </Typography>
         </div>
@@ -36,20 +34,9 @@ const Product = ({ product, onAddToCart }) => {
           </Typography>
         </div>
 
-        <Typography
-          dangerouslySetInnerHTML={{ __html: product.description }}
-          variant="body2"
-          color="textSecondary"
-        />
+
       </CardContent>
-      <CardActions disableSpacing className={classes.cardActions}>
-        <IconButton
-          aria-label="Add to Cart"
-          onClick={() => onAddToCart(product.id, 1)}
-        >
-          <AddShoppingCart />
-        </IconButton>
-      </CardActions>
+   
       </Link>
     </Card>
   );

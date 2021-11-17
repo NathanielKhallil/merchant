@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
+import { AppBar } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import useStyles from "./styles";
 import {
@@ -23,10 +19,10 @@ const Footer = () => {
           justifyContent: "left",
         }}
       >
-        <Container maxWidth={false}>
-          <Toolbar>
-            <Typography variant="body1" color="inherit">
-              Follow me on Instagram and Twitter!{" "}
+        <Container maxWidth={false} className={classes.footerBar}>
+         
+            <div color="inherit">
+              <p className={classes.footerText}>Follow me on Instagram and Twitter!{" "}
               <FaInstagram
                 className={classes.icon}
                 onClick={() =>
@@ -44,9 +40,9 @@ const Footer = () => {
                     "_blank"
                   )
                 }
-              />
-            </Typography>
-          </Toolbar>
+              /></p>
+            </div>
+        
         </Container>
       </AppBar>
     </div>
