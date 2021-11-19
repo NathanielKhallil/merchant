@@ -1,6 +1,23 @@
 import { makeStyles } from "@material-ui/core/styles";
+import remyWhiteShirt from "../../assets/remyWhiteShirt.webp";
+import remyStyledShirt from "../../assets/remyStyledShirt.webp";
+import remyHero3 from "../../assets/remyHero3.webp";
 
 export default makeStyles((theme) => ({
+  backgroundContainer: {
+    marginTop: "0",
+    display: "block",
+    backgroundImage: `url(${remyWhiteShirt})`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    [theme.breakpoints.down("md")]: {
+      backgroundImage: `url(${remyStyledShirt})`,
+    },
+    [theme.breakpoints.down("sm")]: {
+      backgroundImage: `url(${remyHero3})`,
+    },
+  },
+
   toolbar: {
     minHeight: "2rem",
   },

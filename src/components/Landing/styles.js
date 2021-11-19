@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import remyHero from "../../assets/remyHero.webp";
-import remyHero2 from "../../assets/remyHero2.webp";
+import remyGhost from "../../assets/remyGhost.webp";
 
 export default makeStyles((theme) => ({
   coverPhoto: {
@@ -15,7 +15,7 @@ export default makeStyles((theme) => ({
 
     [theme.breakpoints.down("md")]: {
       marginTop: "0",
-      backgroundImage: `url(${remyHero2})`,
+      backgroundImage: `url(${remyGhost})`,
     },
   },
 }));

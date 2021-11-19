@@ -10,7 +10,11 @@ const mocks = ['Cart']; // We'll fill this in next
 it('renders without error', () => {
   const component = TestRenderer.create(
     <MockedProvider addTypename={false}>
-      <Cart />               
+      <Cart                 
+      cart={cart} 
+      handleUpdateCartQty={handleUpdateCartQty}
+      handleRemoveFromCart={handleRemoveFromCart}
+      handleEmptyCart={handleEmptyCart}/>               
 
     </MockedProvider>,
   );

@@ -1,8 +1,18 @@
 import { makeStyles } from "@material-ui/core/styles";
+import remyHero from "../../assets/remyHero.webp";
+import remyStyledShirt from "../../assets/remyStyledShirt.webp";
 
 export default makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
-
+  backgroundContainer: {
+    marginTop: "0",
+    display: "block",
+    backgroundImage: `url(${remyHero})`,
+    backgroundPosition: "center top",
+    backgroundSize: "cover",
+    width: "100%",
+    backgroundRepeat: "no-repeat",
+  },
   contentContainer: {
     [theme.breakpoints.up("md")]: {
       width: "100%",

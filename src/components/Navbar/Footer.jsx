@@ -11,8 +11,9 @@ const Footer = () => {
   const classes = useStyles();
   return (
     <div>
+      <div style={{paddingTop: '2rem', background: 'black'}}/>
       <AppBar
-        style={{
+        style={{ 
           position: "fixed",
           background: "#000",
           marginTop: "94vh",

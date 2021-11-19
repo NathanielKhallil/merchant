@@ -37,11 +37,7 @@ const theme = createTheme({
         margin: "1rem 0",
       },
     },
-    MuiIconButton: {
-      root: {
-        marginTop: ".5rem",
-      },
-    },
+
     MuiToolbar: {
       root: {
         display: "flex",
@@ -64,12 +60,12 @@ const theme = createTheme({
           padding: "0 1rem 0 0",
         },
       },
-      MuiIconButton: {
-        root: {
-          marginTop: ".5rem",
-          padding: "12px 12px",
-          marginRight: "10px",
-        },
+    },
+    MuiIconButton: {
+      root: {
+        marginTop: ".5rem",
+        padding: "12px 12px",
+        marginRight: "10px",
       },
     },
   },

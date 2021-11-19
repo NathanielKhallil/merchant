@@ -80,19 +80,21 @@ function Cart({
     <div>"...loading"</div>
   );
   return (
-    <Container>
-      <div className={classes.toolbar}/>
-      <Typography
-        className={classes.title}
-        variant="h4"
-        
-        gutterBottom
-      >
-        Review your cart
-      </Typography>
-      {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}
-      <div style={{ marginBottom: "5rem" }} />
-    </Container>
+    <div className={classes.backgroundContainer}> 
+      <Container>
+        <div className={classes.toolbar}/>
+        <Typography
+          className={classes.title}
+          variant="h4"
+      
+          gutterBottom
+        >
+          Review your cart
+        </Typography>
+        {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}
+        <div style={{ paddingBottom: "5rem" }} />
+      </Container>
+    </div>
   );
 }
 

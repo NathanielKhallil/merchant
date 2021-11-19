@@ -1,6 +1,17 @@
 import { makeStyles } from "@material-ui/core/styles";
+import remyWhiteShirt from "../../assets/remyWhiteShirt.webp";
 
-export default makeStyles(() => ({
+export default makeStyles((theme) => ({
+  container: {
+    marginTop: "0",
+    display: "block",
+    background: "black",
+    backgroundPosition: "center top",
+    backgroundSize: "cover",
+    width: "100%",
+    backgroundRepeat: "no-repeat",
+  },
+
   button: {
     backgroundColor: "black",
     color: "white",

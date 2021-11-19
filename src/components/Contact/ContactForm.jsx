@@ -19,6 +19,7 @@ const ContactForm = () => {
   const [token, setToken] = useState(null);
   const [sentMessage, setSentMessage] = useState(false);
 
+
   const handleToken = (token) => {
     setFormData((currentForm) => {
       setToken(token);
@@ -42,12 +43,7 @@ const ContactForm = () => {
     if (token && captchaVerified)
       setSentMessage(true);
       emailjs
-        .sendForm(
-          process.env.EMAIL_SERVICE,
-          process.env.EMAIL_TEMPLATE,
-          e.target,
-          process.env.EMAIL_USER
-        )
+        .sendForm(process.env.REACT_APP_EMAIL_SERVICE, process.env.REACT_APP_EMAIL_TEMPLATE, e.target, process.env.REACT_APP_EMAIL_USER)
         .then((result) => {
           console.log(result);
         })
@@ -84,9 +80,9 @@ const ContactForm = () => {
     );
 
   return (
-    <>
+    <div className={classes.container}>
        <Grid>
-        <Card style={{ maxWidth: 450, padding: "20px 5px", margin: "0 auto" }}>
+        <Card style={{ maxWidth: 450, padding: "10px 5px", margin: "0 auto"}}>
           <CardContent>
             <Typography gutterBottom variant="h6">
             For potential appearances, comments or inquiries, please complete the
@@ -177,7 +173,7 @@ const ContactForm = () => {
           </CardContent>
         </Card>
       </Grid>
-    </>
+    </div>
   );
 };
 
