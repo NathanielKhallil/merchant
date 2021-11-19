@@ -7,14 +7,17 @@ export default makeStyles((theme) => ({
   backgroundContainer: {
     marginTop: "0",
     display: "block",
+    minHeight: "100vh",
     backgroundImage: `url(${remyWhiteShirt})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     [theme.breakpoints.down("md")]: {
       backgroundImage: `url(${remyStyledShirt})`,
+      minHeight: "100vh",
     },
     [theme.breakpoints.down("sm")]: {
       backgroundImage: `url(${remyHero3})`,
+      minHeight: "100vh",
     },
   },
 

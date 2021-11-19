@@ -3,12 +3,13 @@ import remyWhiteShirt from "../../assets/remyWhiteShirt.webp";
 
 export default makeStyles((theme) => ({
   container: {
-    marginTop: "0",
+    paddingTop: "5rem",
     display: "block",
     background: "black",
-    backgroundPosition: "center top",
+    backgroundPosition: "center center",
     backgroundSize: "cover",
     width: "100%",
+    minHeight: "100vh",
     backgroundRepeat: "no-repeat",
   },
 

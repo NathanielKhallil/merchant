@@ -8,9 +8,10 @@ export default makeStyles((theme) => ({
     marginTop: "0",
     display: "block",
     backgroundImage: `url(${remyHero})`,
-    backgroundPosition: "center top",
+    backgroundPosition: "center center",
     backgroundSize: "cover",
     width: "100%",
+    minHeight: "100vh",
     backgroundRepeat: "no-repeat",
   },
   contentContainer: {

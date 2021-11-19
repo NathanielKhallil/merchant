@@ -52,7 +52,7 @@ export default makeStyles((theme) => ({
   },
 
   cardContent: {
-    color: "black",
+    color: "white",
   },
   muiTypographyOverride: {
     width: "44rem",

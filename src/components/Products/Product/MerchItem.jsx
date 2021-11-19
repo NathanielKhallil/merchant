@@ -3,8 +3,9 @@ import { Grid, Button, Typography, Container } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import { commerce } from "../../../lib/commerce";
 import { Select, MenuItem } from "@material-ui/core";
-
 import { useState, useEffect } from "react";
+import useStyles from "./styleMerch";
+
 
 const createMarkup = (text) => {
   return { __html: text };
@@ -16,6 +17,7 @@ const MerchItem = ({ handleAddToCart }) => {
   const [quantity, setQuantity] = useState(1);
   const [sizeOption, setSizeOption] = useState([]);
   const [variantGroup, setVariantGroup] = useState();
+  const classes = useStyles();
 
   const fetchProduct = async (id) => {
     const response = await commerce.products.retrieve(id);
@@ -33,7 +35,7 @@ const MerchItem = ({ handleAddToCart }) => {
       variant_groups: variant_groups,
     });
   };
-  console.log(product)
+  
   const getVariants = async (id) => {
     const data = await commerce.products.retrieve(id);
 
@@ -73,131 +75,131 @@ const MerchItem = ({ handleAddToCart }) => {
   };
 
   return (
-    <Container>
-      <Grid>
-        <Grid item xs={12} md={8}>
-          <img
-            onLoad={() => {
-              // setLoading(false);
-            }}
-            src={product.src}
-            alt={product.name}
-          />
+    <div className={classes.backgroundContainer}>
+      <Container className={classes.gridPosition}>
+        <Grid>
+          <Grid item xs={12} md={8}>
+            <img
+              onLoad={() => {
+                // setLoading(false);
+              }}
+              src={product.src}
+              alt={product.name}
+              style={{width: '100%'}}
+            />
+          </Grid>
+          <Grid item xs={12} md={4} className={classes.cardContent}>
+            <Typography variant="h4" className={classes.muiTypographyOverride}>{product.name}</Typography>
+            <Typography
+              variant="body2"
+              dangerouslySetInnerHTML={createMarkup(product.description)}
+            />
+            <Typography variant="h6">
+              <table variant="h6" style={{ textAlign: "justify" }}>
+                <caption colSpan="5" style={{ textAlign: "left" }}>
+                  Select your size!
+                </caption>
+                <thead variant="caption">
+                  <tr style={{ textAlign: "center" }}>
+                    <th style={{ textAlign: "left", width: "4rem" }}>
+                      {" "}
+                      Size(In):
+                    </th>
+                    <th variant="h6" style={{ width: "4rem" }}>
+                      S
+                    </th>
+                    <th variant="h6">M</th>
+                    <th variant="h6">L</th>
+                    <th variant="h6">XL</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style={{ textAlign: "center", fontSize: "1rem" }}>
+                    <td style={{ textAlign: "left" }}>
+                      <strong>width:</strong>
+                    </td>
+                    <td>18</td>
+                    <td>20</td>
+                    <td>22</td>
+                    <td>24</td>
+                  </tr>
+                  <tr style={{ textAlign: "center", fontSize: "1rem" }}>
+                    <td style={{ textAlign: "left" }}>
+                      {" "}
+                      <strong>height:</strong>{" "}
+                    </td>
+                    <td> 28 </td>
+                    <td>
+                      {" "}
+                      29 <sup>1</sup>&frasl;<sub>4</sub>{" "}
+                    </td>
+                    <td>
+                      {" "}
+                      30 <sup>1</sup>&frasl;<sub>4</sub>{" "}
+                    </td>
+                    <td>
+                      {" "}
+                      31 <sup>1</sup>&frasl;<sub>4</sub>{" "}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <Select
+                value={sizeOption}
+                fullWidth
+                onChange={(e) => setSizeOption(e.target.value)}
+              >
+                {variant.map((element) => (
+                  <MenuItem key={element.name} value={element.id}>
+                    {element.name}
+                  </MenuItem>
+                ))}
+              </Select>
+              <p></p>
+            </Typography>
+            <Typography variant="h6"> Price: {product.price}</Typography>
+            <Grid item xs={12}>
+              <Button
+                size="small"
+                variant="contained"
+                onClick={() => {
+                  handleQuantity("increase");
+                }}
+              >
+                +
+              </Button>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="h6">Quantity: {quantity}</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                size="small"
+                variant="contained"
+                color="secondary"
+                onClick={() => {
+                  handleQuantity("decrease");
+                }}
+              >
+                -
+              </Button>
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                size="large"
+                variant="containedPrimary"
+                color="primary"
+                onClick={() => {
+                  handleAddToCart(product.id, quantity, variantGroup);
+                }}
+              >
+                <ShoppingCart /> Add to Cart
+              </Button>
+            </Grid>
+          </Grid>
         </Grid>
-
-        <Grid item xs={12} md={4}>
-          <Typography variant="h4">{product.name}</Typography>
-          <Typography
-            variant="body2"
-            dangerouslySetInnerHTML={createMarkup(product.description)}
-          />
-          <Typography variant="h6">
-            <table variant="h6" style={{ textAlign: "justify" }}>
-              <caption colSpan="5" style={{ textAlign: "left" }}>
-                Select your size!
-              </caption>
-              <thead variant="caption">
-                <tr style={{ textAlign: "center" }}>
-                  <th style={{ textAlign: "left", width: "4rem" }}>
-                    {" "}
-                    Size(In):
-                  </th>
-                  <th variant="h6" style={{ width: "4rem" }}>
-                    S
-                  </th>
-                  <th variant="h6">M</th>
-                  <th variant="h6">L</th>
-                  <th variant="h6">XL</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr style={{ textAlign: "center", fontSize: "1rem" }}>
-                  <td style={{ textAlign: "left" }}>
-                    <strong>width:</strong>
-                  </td>
-                  <td>18</td>
-                  <td>20</td>
-                  <td>22</td>
-                  <td>24</td>
-                </tr>
-
-                <tr style={{ textAlign: "center", fontSize: "1rem" }}>
-                  <td style={{ textAlign: "left" }}>
-                    {" "}
-                    <strong>height:</strong>{" "}
-                  </td>
-                  <td> 28 </td>
-                  <td>
-                    {" "}
-                    29 <sup>1</sup>&frasl;<sub>4</sub>{" "}
-                  </td>
-                  <td>
-                    {" "}
-                    30 <sup>1</sup>&frasl;<sub>4</sub>{" "}
-                  </td>
-                  <td>
-                    {" "}
-                    31 <sup>1</sup>&frasl;<sub>4</sub>{" "}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            <Select
-              value={sizeOption}
-              fullWidth
-              onChange={(e) => setSizeOption(e.target.value)}
-            >
-              {variant.map((element) => (
-                <MenuItem key={element.name} value={element.id}>
-                  {element.name}
-                </MenuItem>
-              ))}
-            </Select>
-            <p></p>
-          </Typography>
-
-          <Typography variant="h6"> Price: {product.price}</Typography>
-          <Grid item xs={12}>
-            <Button
-              size="small"
-              variant="contained"
-              onClick={() => {
-                handleQuantity("increase");
-              }}
-            >
-              +
-            </Button>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant="h6">Quantity: {quantity}</Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <Button
-              size="small"
-              variant="contained"
-              color="secondary"
-              onClick={() => {
-                handleQuantity("decrease");
-              }}
-            >
-              -
-            </Button>
-          </Grid>
-          <Grid item xs={12}>
-            <Button
-              size="large"
-              onClick={() => {
-                handleAddToCart(product.id, quantity, variantGroup);
-              }}
-            >
-              <ShoppingCart /> Add to Cart
-            </Button>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </div>
   );
 };
 
