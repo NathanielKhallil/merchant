@@ -1,5 +1,4 @@
 import React from "react";
-import { AppBar } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import useStyles from "./styles";
 import {
@@ -11,13 +10,18 @@ const Footer = () => {
   const classes = useStyles();
   return (
     <div>
-      <div style={{paddingTop: '2rem', background: 'black'}}/>
-      <AppBar
+      
+      <div
         style={{ 
-          position: "fixed",
+          position: "absolute",
+          color: "white",
           background: "#000",
-          
-          justifyContent: "left",
+          bottom: "0",
+          left: "0",
+          right: "0",
+          minHeight: "1rem",
+          padding: ".5rem 0",
+          justifyContent: "center",
         }}
       >
         <Container maxWidth={false} className={classes.footerBar}>
@@ -45,7 +49,7 @@ const Footer = () => {
             </div>
         
         </Container>
-      </AppBar>
+      </div>
     </div>
   );
 };

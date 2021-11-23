@@ -125,19 +125,20 @@ export default makeStyles((theme) => ({
   footerBar: {
     display: "flex",
     position: "relative",
+    flexDirection: "column",
     fontFamily: "Roboto, Helvetica, Arial, sans-serif",
-    minHeight: "6vh",
     width: "100%",
-    alignItems: "center",
-    marginTop: "auto",
+    alignItems: "flexStart",
   },
   footerText: {
     [theme.breakpoints.up("xs")]: {
       margin: "0",
-      fontSize: "88%",
+      fontSize: "95%",
+      alignItems: "center",
     },
     [theme.breakpoints.up("sm")]: {
       fontSize: "100%",
+      alignItems: "flexStart",
     },
   },
 }));
