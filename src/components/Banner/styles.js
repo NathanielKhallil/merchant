@@ -17,5 +17,8 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       marginTop: "-2rem",
     },
+    [theme.breakpoints.up("lg")]: {
+      marginTop: "-2rem",
+    },
   },
 }));

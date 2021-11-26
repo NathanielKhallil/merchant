@@ -1,11 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
 import remyHero from "../../assets/remyHero.webp";
-import remyStyledShirt from "../../assets/remyStyledShirt.webp";
+import remyHeroBig from "../../assets/remyHeroBig.webp";
+import remyHero4 from "../../assets/remyHero4.webp";
 
 export default makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   backgroundContainer: {
-    marginTop: "0",
     display: "block",
     backgroundImage: `url(${remyHero})`,
     backgroundPosition: "center center",
@@ -13,6 +13,14 @@ export default makeStyles((theme) => ({
     width: "100%",
     minHeight: "100vh",
     backgroundRepeat: "no-repeat",
+    [theme.breakpoints.up("md")]: {
+      backgroundImage: `url(${remyHeroBig})`,
+      backgroundSize: "cover",
+    },
+    [theme.breakpoints.down("sm")]: {
+      backgroundImage: `url(${remyHero4})`,
+      backgroundSize: "cover",
+    },
   },
   contentContainer: {
     [theme.breakpoints.up("md")]: {
@@ -22,6 +30,35 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.up("lg")]: {
       width: "70%",
       margin: "0 auto",
+    },
+  },
+  logo: {
+    width: "3rem",
+    height: "2rem",
+  },
+  icon: {
+    color: "white",
+    background: "orange",
+    cursor: "pointer",
+    "&:hover": {
+      transform: "scale(1.2)",
+    },
+    "&:active": {
+      transform: "scale(1.2)",
+    },
+  },
+
+  buyerNotice: {
+    color: "white",
+    background: "black",
+    textAlign: "justified",
+    padding: ".5rem",
+
+    [theme.breakpoints.up("md")]: {
+      fontSize: "1rem",
+    },
+    [theme.breakpoints.down("md")]: {
+      fontSize: ".8rem",
     },
   },
 

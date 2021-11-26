@@ -13,7 +13,7 @@ const Footer = () => {
       
       <div
         style={{ 
-          position: "absolute",
+          position: "fixed",
           color: "white",
           background: "#000",
           bottom: "0",
