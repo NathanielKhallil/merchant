@@ -51,6 +51,31 @@ export default makeStyles((theme) => ({
     },
   },
 
+  desktopNavigation: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+    },
+  },
+
+  mobileNavigation: {
+    display: "flex",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+  },
+
+  hamburger: {
+    display: "flex",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+    posiiton: "absolute",
+    cursor: "pointer",
+    paddingTop: "1.2rem",
+    transform: "scale(1.5)",
+  },
+
   navUl: {
     display: "flex",
     fontFamily: "Roboto, Helvetica, Arial, sans-serif",

@@ -2,7 +2,7 @@ import React from "react";
 import useStyles from "./styles";
 import bannerImage from "../../assets/Ghostpine_Banner.webp";
 
-function Banner() {
+const Banner = () => {
   const classes = useStyles();
   return (
     <div className={classes.bannerContainer}>

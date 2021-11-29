@@ -8,13 +8,14 @@ export default makeStyles((theme) => ({
   backgroundContainer: {
     display: "block",
     backgroundImage: `url(${remyHero})`,
-    backgroundPosition: "center center",
+    backgroundPosition: "center top",
     backgroundSize: "cover",
     width: "100%",
     minHeight: "100vh",
     backgroundRepeat: "no-repeat",
+    margin: "0",
     [theme.breakpoints.up("md")]: {
-      backgroundImage: `url(${remyHeroBig})`,
+      backgroundImage: `url(${remyHero})`,
       backgroundSize: "cover",
     },
     [theme.breakpoints.down("sm")]: {
@@ -49,9 +50,10 @@ export default makeStyles((theme) => ({
   },
 
   buyerNotice: {
+    position: "relative",
     color: "white",
     background: "black",
-    textAlign: "justified",
+    textAlign: "justify",
     padding: ".5rem",
 
     [theme.breakpoints.up("md")]: {

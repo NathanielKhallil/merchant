@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { commerce } from "./lib/commerce";
 import {
   Products,
+  Notice,
   Navbar,
   Cart,
   Banner,
@@ -142,7 +143,8 @@ const App = () => {
               <Landing />
             </Route>
             <Route exact path="/products">
-              <Products products={products} onAddToCart={handleAddToCart} />
+              <Notice />
+              <Products products={products} />
             </Route>
             <Route exact path="/merchitem/:id">
               <MerchItem handleAddToCart={handleAddToCart} />
