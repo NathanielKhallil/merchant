@@ -9,7 +9,9 @@ import {
 } from "@material-ui/core";
 import NavlinksDesktop from "./NavlinksDesktop";
 import NavlinksMobile from "./NavlinksMobile";
-import { CgMenuRound, CgCloseO } from "react-icons/cg"
+
+import { FaStream } from "react-icons/fa"
+import { CgCloseO } from "react-icons/cg"
 import { ShoppingCart } from "@material-ui/icons";
 import logo from "../../assets/remyLogo.png";
 import useStyles from "./styles";
@@ -20,12 +22,12 @@ const Navbar = ({ totalItems }) => {
   const location = useLocation();
   const [open, setOpen] = useState(false);
 
-  const hamburgerIcon = <CgMenuRound className={classes.hamburger}
-  onClick={()=> setOpen(!open)}
+  const hamburgerIcon = <FaStream className={classes.hamburger} onClick={()=> setOpen(!open)}
   />
-  const closeIcon = <CgCloseO className={classes.hamburger}
-  onClick={()=> setOpen(!open)}
+  const closeIcon = <CgCloseO className={classes.hamburger} onClick={()=> setOpen(!open)}
   />
+
+   
 
   return (
     <div>
@@ -50,8 +52,8 @@ const Navbar = ({ totalItems }) => {
              <NavlinksDesktop/>
              
              {open ? closeIcon : hamburgerIcon}
-             {open && <NavlinksMobile />}
-
+             {open && <NavlinksMobile closeLinks={links => setOpen(links)}/>}
+             <div className={classes.growMobile} />
               
             {location.pathname !== "/cart" && (
               <div className={classes.button}>

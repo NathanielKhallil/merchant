@@ -58,7 +58,7 @@ const theme = createTheme({
       },
       gutters: {
         [defaultTheme.breakpoints.up("xs")]: {
-          padding: "0 1rem 0 0",
+          padding: "0",
         },
       },
     },
@@ -66,7 +66,7 @@ const theme = createTheme({
       root: {
         marginTop: ".5rem",
         padding: "12px 12px",
-        marginRight: "10px",
+        marginRight: "0",
       },
     },
   },

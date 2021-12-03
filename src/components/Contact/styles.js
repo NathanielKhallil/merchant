@@ -1,7 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
-import remyWhiteShirt from "../../assets/remyWhiteShirt.webp";
 
-export default makeStyles((theme) => ({
+export default makeStyles(() => ({
   container: {
     paddingTop: "5rem",
     display: "block",

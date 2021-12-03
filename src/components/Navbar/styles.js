@@ -49,6 +49,9 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.up("xs")]: {
       width: "100%",
     },
+    [theme.breakpoints.down("md")]: {
+      justifyContent: "flex-start",
+    },
   },
 
   desktopNavigation: {
@@ -60,6 +63,9 @@ export default makeStyles((theme) => ({
 
   mobileNavigation: {
     display: "flex",
+    position: "relative",
+    width: "100%",
+
     [theme.breakpoints.up("md")]: {
       display: "none",
     },
@@ -67,10 +73,11 @@ export default makeStyles((theme) => ({
 
   hamburger: {
     display: "flex",
+    marginLeft: "1rem",
     [theme.breakpoints.up("md")]: {
       display: "none",
     },
-    posiiton: "absolute",
+    position: "relative",
     cursor: "pointer",
     paddingTop: "1.2rem",
     transform: "scale(1.5)",
@@ -91,6 +98,26 @@ export default makeStyles((theme) => ({
     },
   },
 
+  navUlMobile: {
+    display: "flex",
+    flexDirection: "column",
+    position: "relative",
+    textAlign: "center",
+    // top: "3rem",
+    // left: "4rem",
+    margin: "3rem auto 0 auto",
+    padding: "0",
+    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+
+    listStyle: "none",
+    [theme.breakpoints.up("xs")]: {
+      width: "100%",
+    },
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "100%",
+    },
+  },
+
   listItem: {
     display: "inline-block",
     fontWeight: "bold",
@@ -104,10 +131,13 @@ export default makeStyles((theme) => ({
       color: "#e60000",
     },
     [theme.breakpoints.up("xs")]: {
-      padding: "0 11px",
+      padding: "0",
+      margin: "0",
+      width: "8rem",
     },
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       padding: "0 11px",
+      width: "8rem",
     },
   },
 
@@ -119,25 +149,24 @@ export default makeStyles((theme) => ({
     "&:hover": {
       color: "#e60000",
     },
-    [theme.breakpoints.up("xs")]: {
-      width: "30px",
-    },
-    [theme.breakpoints.up("sm")]: {
-      width: "30px",
-    },
   },
 
   image: {
     marginRight: "10px",
   },
-  menuButton: {
-    marginRight: theme.spacing(1),
-    [theme.breakpoints.up("xs")]: {
+
+  grow: {
+    flexGrow: "1",
+    [theme.breakpoints.down("md")]: {
       display: "none",
     },
   },
-  grow: {
-    flexGrow: 1,
+
+  growMobile: {
+    flexGrow: "1.7",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
   },
 
   icon: {

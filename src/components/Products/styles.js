@@ -1,6 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
 import remyHero from "../../assets/remyHero.webp";
-import remyHeroBig from "../../assets/remyHeroBig.webp";
 import remyHero4 from "../../assets/remyHero4.webp";
 
 export default makeStyles((theme) => ({
