@@ -1,4 +1,4 @@
-import { makeStyles, alpha } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 const drawerWidth = 0;
 
@@ -10,26 +10,112 @@ export default makeStyles((theme) => ({
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
+    [theme.breakpoints.up("xs")]: {
+      display: "block",
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
   },
+
   title: {
     flexGrow: 10,
+    fontWeight: "bold",
     alignItems: "center",
     display: "flex",
     textDecoration: "none",
+    [theme.breakpoints.up("xs")]: {
+      width: "100%",
+      margin: "1rem 0 0 2.2rem",
+      fontSize: "100%",
+    },
+    [theme.breakpoints.up("sm")]: {
+      margin: "1rem 1rem 0rem 3rem",
+      fontSize: "100%",
+      justifyContent: "flex-start",
+    },
+    [theme.breakpoints.up("md")]: {
+      margin: "0 0 0 1rem",
+      fontSize: "105%",
+      justifyContent: "flex-start",
+    },
   },
 
   navBar: {
+    position: "relative",
     display: "flex",
     fontFamily: "",
     flexGrow: 9,
     flexDirection: "row",
+    [theme.breakpoints.up("xs")]: {
+      width: "100%",
+    },
+    [theme.breakpoints.down("md")]: {
+      justifyContent: "flex-start",
+    },
+  },
+
+  desktopNavigation: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+    },
+  },
+
+  mobileNavigation: {
+    display: "flex",
+    position: "relative",
+    width: "100%",
+
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+  },
+
+  hamburger: {
+    display: "flex",
+    marginLeft: "1rem",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+    position: "relative",
+    cursor: "pointer",
+    paddingTop: "1.2rem",
+    transform: "scale(1.5)",
   },
 
   navUl: {
-    display: "inline",
-    padding: "0",
+    display: "flex",
+    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+    padding: "0 1rem 0 0",
     width: "16rem",
     listStyle: "none",
+    [theme.breakpoints.up("xs")]: {
+      width: "14rem",
+      justifyContent: "flex-start",
+    },
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "100%",
+    },
+  },
+
+  navUlMobile: {
+    display: "flex",
+    flexDirection: "column",
+    position: "relative",
+    textAlign: "center",
+    // top: "3rem",
+    // left: "4rem",
+    margin: "3rem auto 0 auto",
+    padding: "0",
+    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+
+    listStyle: "none",
+    [theme.breakpoints.up("xs")]: {
+      width: "100%",
+    },
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "100%",
+    },
   },
 
   listItem: {
@@ -43,12 +129,20 @@ export default makeStyles((theme) => ({
     },
     "&:hover": {
       color: "#e60000",
-      // transform: "scale(1.1)",
+    },
+    [theme.breakpoints.up("xs")]: {
+      padding: "0",
+      margin: "0",
+      width: "8rem",
+    },
+    [theme.breakpoints.up("md")]: {
+      padding: "0 11px",
+      width: "8rem",
     },
   },
 
   link: {
-    fontSize: "105%",
+    fontSize: "100%",
     width: "50px",
     color: "black",
     textDecoration: "none",
@@ -60,55 +154,45 @@ export default makeStyles((theme) => ({
   image: {
     marginRight: "10px",
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up("sm")]: {
+
+  grow: {
+    flexGrow: "1",
+    [theme.breakpoints.down("md")]: {
       display: "none",
     },
   },
-  grow: {
-    flexGrow: 1,
-  },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "auto",
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  inputRoot: {
-    color: "inherit",
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
+
+  growMobile: {
+    flexGrow: "1.7",
     [theme.breakpoints.up("md")]: {
-      width: "20ch",
+      display: "none",
     },
   },
+
   icon: {
     cursor: "pointer",
     "&:hover": {
       transform: "scale(1.2)",
+    },
+  },
+
+  footerBar: {
+    display: "flex",
+    position: "relative",
+    flexDirection: "column",
+    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+    width: "100%",
+    alignItems: "flexStart",
+  },
+  footerText: {
+    [theme.breakpoints.up("xs")]: {
+      margin: "0",
+      fontSize: "95%",
+      alignItems: "center",
+    },
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "100%",
+      alignItems: "flexStart",
     },
   },
 }));

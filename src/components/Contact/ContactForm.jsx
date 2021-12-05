@@ -17,6 +17,8 @@ const ContactForm = () => {
   const [formData, setFormData] = useState();
   const [captchaVerified, setCaptchaVerified] = useState(false);
   const [token, setToken] = useState(null);
+  const [sentMessage, setSentMessage] = useState(false);
+
 
   const handleToken = (token) => {
     setFormData((currentForm) => {
@@ -29,6 +31,7 @@ const ContactForm = () => {
   const handleExpire = () => {
     setFormData((currentForm) => {
       setToken(null);
+      setCaptchaVerified(false);
       return { ...currentForm, token: null };
     });
   };
@@ -38,18 +41,18 @@ const ContactForm = () => {
     if (!token) setCaptchaVerified(false);
 
     if (token && captchaVerified)
+      setSentMessage(true);
       emailjs
-        .sendForm(
-          "service_9wnov1r",
-          "template_sy18c7a",
-          e.target,
-          "user_V4iSx9ZvWTRDmS9V2iIDE"
-        )
+        .sendForm(process.env.REACT_APP_EMAIL_SERVICE, process.env.REACT_APP_EMAIL_TEMPLATE, e.target, process.env.REACT_APP_EMAIL_USER)
         .then((result) => {
           console.log(result);
         })
         .catch((error) => console.log(error));
-  };
+    };
+
+    if (sentMessage) {
+        document.getElementById("contactForm").reset()
+    }
 
   const CaptchaMessage = () =>
     token === null ? (
@@ -59,28 +62,31 @@ const ContactForm = () => {
           Please verify you are human
         </Typography>
       </>
-    ) : token !== null ? (
+    ) : (token !== null && !sentMessage) ? (
       <>
         <Typography gutterBottom style={{ color: "green" }}>
           {" "}
           Thank you for verifying you are human!{" "}
         </Typography>
       </>
-    ) : (
+    ) : (sentMessage && token) ? (
+        <>
+        <Typography gutterBottom style={{ color: "green" }}>
+          {" "}
+          Message sent!!{" "}
+        </Typography>
+      </>) : (
       <></>
     );
 
   return (
-    <>
-      <Typography gutterBottom variant="h6" align="center">
-        For potential appearances, commments or inquiries, please complete the
-        form below.
-      </Typography>
-      <Grid>
-        <Card style={{ maxWidth: 450, padding: "20px 5px", margin: "0 auto" }}>
+    <div className={classes.container}>
+       <Grid>
+        <Card style={{ maxWidth: 450, padding: "10px 5px", margin: "0 auto"}}>
           <CardContent>
-            <Typography gutterBottom variant="h5">
-              Reach out to me!
+            <Typography gutterBottom variant="h6">
+            For potential appearances, comments or inquiries, please complete the
+        form below.
             </Typography>
             <Typography
               gutterBottom
@@ -90,7 +96,7 @@ const ContactForm = () => {
             >
               Fill out the form and I'll get back to you as soon as possible.
             </Typography>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} id="contactForm">
               <Grid container spacing={1}>
                 <Grid xs={12} sm={6} item>
                   <TextField
@@ -127,7 +133,7 @@ const ContactForm = () => {
                   <TextField
                     type="number"
                     placeholder="Enter phone number (optional)"
-                    label="Phone"
+                    label="Phone (optional)"
                     variant="outlined"
                     fullWidth
                     name="phone"
@@ -156,7 +162,7 @@ const ContactForm = () => {
                   </Button>
                 </Grid>
                 <ReCaptchaV2
-                  style={{ display: "inline-block" }}
+                  className={classes.reCaptcha}
                   sitekey={process.env.REACT_APP_SITE_KEY}
                   onChange={handleToken}
                   onExpired={handleExpire}
@@ -167,7 +173,7 @@ const ContactForm = () => {
           </CardContent>
         </Card>
       </Grid>
-    </>
+    </div>
   );
 };
 

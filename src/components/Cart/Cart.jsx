@@ -20,7 +20,7 @@ function Cart({
   const classes = useStyles();
 
   const EmptyCart = () => (
-    <Typography varient="subtitle1" style={{ color: "white" }}>
+    <Typography variant="subtitle1" style={{ color: "white" }}>
       You have no items in your cart.
       <Link to="/products" className={classes.link}>
         Add some merch
@@ -31,11 +31,11 @@ function Cart({
 
   const FilledCart = () => (
     <div>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} className={classes.positionContent}>
         {cart.line_items.map((item) => (
-          <Grid item xs={12} sm={4} key={uuidv4()}>
-            <div>
-              <CartItem
+          <Grid item xs={12} sm={8} md={4} key={uuidv4()}>
+            <div className={classes.itemContainer}>
+              <CartItem 
                 item={item}
                 onUpdateCartQty={handleUpdateCartQty}
                 onRemoveFromCart={handleRemoveFromCart}
@@ -75,22 +75,26 @@ function Cart({
     </div>
   );
 
-  if (!cart.line_items) return "...loading";
-
+  if (!cart.line_items) return (
+    
+    <div>"...loading"</div>
+  );
   return (
-    <Container>
-      <div className={classes.toolbar} />
-      <Typography
-        className={classes.title}
-        variant="h4"
-        style={{ color: "white" }}
-        gutterBottom
-      >
-        In your cart!
-      </Typography>
-      {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}
-      <div style={{ marginBottom: "5rem" }} />
-    </Container>
+    <div className={classes.backgroundContainer}> 
+      <Container>
+        <div className={classes.toolbar}/>
+        <Typography
+          className={classes.title}
+          variant="h4"
+      
+          gutterBottom
+        >
+          Review your cart
+        </Typography>
+        {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}
+        <div style={{ paddingBottom: "5rem" }} />
+      </Container>
+    </div>
   );
 }
 

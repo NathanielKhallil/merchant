@@ -7,14 +7,27 @@ import {
   Badge,
   Typography,
 } from "@material-ui/core";
-import { ShoppingCart } from "@material-ui/icons";
+import NavlinksDesktop from "./NavlinksDesktop";
+import NavlinksMobile from "./NavlinksMobile";
 
+import { FaStream } from "react-icons/fa"
+import { CgCloseO } from "react-icons/cg"
+import { ShoppingCart } from "@material-ui/icons";
 import logo from "../../assets/remyLogo.png";
 import useStyles from "./styles";
+import { useState } from 'react';
 
 const Navbar = ({ totalItems }) => {
   const classes = useStyles();
   const location = useLocation();
+  const [open, setOpen] = useState(false);
+
+  const hamburgerIcon = <FaStream className={classes.hamburger} onClick={()=> setOpen(!open)}
+  />
+  const closeIcon = <CgCloseO className={classes.hamburger} onClick={()=> setOpen(!open)}
+  />
+
+   
 
   return (
     <div>
@@ -29,52 +42,36 @@ const Navbar = ({ totalItems }) => {
             />
             Ephemeral Remy
           </Typography>
-          <Typography
-            component={"span"}
-            variant="body1"
-            className={classes.navBar}
-          >
-            <Toolbar
+      
+            <Typography
+              component={"span"}
+              variant="body1"
               className={classes.navBar}
-              style={{ justifyContent: "flex-end" }}
             >
-              <ul className={classes.navUl}>
-                <li className={classes.listItem}>
-                  <Link className={classes.link} to="/">
-                    Home
-                  </Link>
-                </li>
-                <li className={classes.listItem}>
-                  <Link className={classes.link} to="/products">
-                    Merch
-                  </Link>
-                </li>
-
-                <li className={classes.listItem}>
-                  <Link className={classes.link} to="/contact">
-                    Contact
-                  </Link>
-                </li>
-
-              </ul>
-            </Toolbar>
-          </Typography>
-
-          <div className={classes.grow} />
-          {location.pathname !== "/cart" && (
-            <div className={classes.button}>
-              <IconButton
-                component={Link}
-                to="/cart"
-                aria-label="Show cart items"
-                color="inherit"
-              >
-                <Badge badgeContent={totalItems} color="secondary">
-                  <ShoppingCart />
-                </Badge>
-              </IconButton>
-            </div>
-          )}
+              <div className={classes.grow} />
+             <NavlinksDesktop/>
+             
+             {open ? closeIcon : hamburgerIcon}
+             {open && <NavlinksMobile closeLinks={links => setOpen(links)}/>}
+             <div className={classes.growMobile} />
+              
+            {location.pathname !== "/cart" && (
+              <div className={classes.button}>
+                <IconButton
+                  component={Link}
+                  to="/cart"
+                  aria-label="Show cart items"
+                  color="inherit"
+                >
+                  <Badge badgeContent={totalItems} color="secondary">
+                    <ShoppingCart />
+                  </Badge>
+                </IconButton>
+              </div>
+            )}
+            </Typography>
+            
+      
         </Toolbar>
       </AppBar>
     </div>

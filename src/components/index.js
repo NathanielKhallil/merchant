@@ -1,4 +1,6 @@
 export { default as Navbar } from "./Navbar/Navbar";
+export { default as NavlinksDesktop } from "./Navbar/NavlinksDesktop";
+export { default as NavlinksMobile } from "./Navbar/NavlinksMobile";
 export { default as Products } from "./Products/Products";
 export { default as Cart } from "./Cart/Cart";
 export { default as Banner } from "./Banner/Banner";
@@ -8,3 +10,4 @@ export { default as Checkout } from "./CheckoutForm/Checkout/Checkout";
 export { default as AddressForm } from "./CheckoutForm/AddressForm";
 export { default as Footer } from "./Navbar/Footer";
 export { default as ContactForm } from "./Contact/ContactForm";
+export { default as Notice } from "./Products/Notice";

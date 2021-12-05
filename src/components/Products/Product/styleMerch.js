@@ -40,9 +40,9 @@ export default makeStyles((theme) => ({
 
   media: {
     height: "4rem",
+
     paddingTop: "56.25%", // 16:9
   },
-
   cardActions: {
     display: "flex",
     justifyContent: "flex-end",
@@ -52,7 +52,7 @@ export default makeStyles((theme) => ({
   },
 
   cardContent: {
-    color: "black",
+    color: "white",
   },
   muiTypographyOverride: {
     width: "44rem",

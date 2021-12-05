@@ -1,15 +1,15 @@
 import React from "react";
+import useStyles from "./styles";
+import bannerImage from "../../assets/Ghostpine_Banner.webp";
 
-import bannerImage from "../../assets/Ghostpine_Banner.jpg";
-
-function Banner() {
+const Banner = () => {
+  const classes = useStyles();
   return (
-    <div>
-      <img
+    <div className={classes.bannerContainer}>
+      <img className={classes.bannerImage}
         src={bannerImage}
-        alt="commerce.js"
-        style={{ width: "100%", maxHeight: "25vh" }}
-      />
+        alt="banner"
+        />
     </div>
   );
 }

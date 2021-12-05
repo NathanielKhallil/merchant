@@ -13,11 +13,7 @@ function CartItem({ item, onUpdateCartQty, onRemoveFromCart }) {
   const classes = useStyles();
   return (
     <Card
-      style={{
-        minWidth: "10.8rem",
-        maxWidth: "21rem",
-        maxHeight: "29rem",
-        margin: "0 auto",
+      style={{ margin: "0 auto",
       }}
     >
       <CardMedia
@@ -25,16 +21,18 @@ function CartItem({ item, onUpdateCartQty, onRemoveFromCart }) {
         alt={item.name}
         className={classes.media}
       />
-      <CardContent
-        className={classes.CardContent}
-        style={{ minWidth: "9.9rem" }}
-      >
-        <Typography variant="h6">{item.name}</Typography>
+      <CardContent classes={{
+        root: classes.default,
+
+      }}>
+        <Typography variant="h6">
+          {item.name}
+        </Typography>
         <Typography variant="body2">
           Size: {item.variant.description}
         </Typography>
         <br /> <br />
-        <Typography variant="body2">
+        <Typography variant="body2" className={classes.decoration}>
           {item.line_total.formatted_with_symbol}
         </Typography>
       </CardContent>
