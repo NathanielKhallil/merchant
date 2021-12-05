@@ -28,20 +28,16 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
 
   useEffect(() => {
     const generateToken = async () => {
-   
-     
       try {
         const token = await commerce.checkout.generateToken(cart.id, {
           type: "cart",
         });
         setCheckoutToken(token);
-       
       } catch (error) {
         history.push("/");
       }
-      
     };
-    
+
     generateToken();
   }, [cart, history]);
 
@@ -51,25 +47,21 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
   };
 
   useEffect(() => {
-    const updateToken = async () => {
+    const updateTax = async () => {
       if (shippingData && checkoutToken) {
-        const token2 = await commerce.checkout
-          .getLocationFromIP(checkoutToken)
-          .then((result) =>
-            commerce.checkout
-              .setTaxZone(checkoutToken.id, {
-                country: result.country_code,
-                region: result.region_code,
-                postal_zip_code: result.postal_zip_code,
-              })
-              .then(commerce.checkout.getLive(checkoutToken.id))
-              );
-              
-        if (token2) setTokenUpdate(token2.live);
+        const location = await commerce.checkout.getLocationFromIP(
+          checkoutToken
+        );
+        await commerce.checkout.setTaxZone(checkoutToken.id, {
+          country: location.country_code,
+          region: location.region_code,
+          postal_zip_code: location.postal_zip_code,
+        });
+        if (location)
+          setTokenUpdate(await commerce.checkout.getLive(checkoutToken.id));
       }
     };
-
-    updateToken(shippingData);
+    updateTax(shippingData);
   }, [checkoutToken, shippingData]);
 
   const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -82,16 +74,15 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
   };
 
   const Confirmation = () =>
-  error ? (
-    <>
-      <Typography variant="h5">Error: {error}</Typography>
-      <br />
-      <Button variant="outline" type="button" component={Link} to="/">
-        Back to Home
-      </Button>
-    </>
-  ) : 
-    order.customer ? (
+    error ? (
+      <>
+        <Typography variant="h5">Error: {error}</Typography>
+        <br />
+        <Button variant="outline" type="button" component={Link} to="/">
+          Back to Home
+        </Button>
+      </>
+    ) : order.customer ? (
       <>
         <div>
           <Typography variant="h5">
@@ -123,9 +114,8 @@ function Checkout({ cart, order, handleCaptureCheckout, error }) {
       <div className={classes.spinner}>
         <CircularProgress />
       </div>
-    ) 
-    
-  
+    );
+
   const Form = () =>
     activeStep === 0 ? (
       <AddressForm checkoutToken={checkoutToken} next={next} />
